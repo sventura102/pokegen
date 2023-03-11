@@ -1,0 +1,18 @@
+{
+  "name": "poke-gen",
+  "version": "1.0.0",
+  "description": "- https://poke-gen.netlify.app/",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sventura102/pokegen.git"
+  },
+  "author": "Belén Chaparro | Stephanie Ventura",
+  "bugs": {
+    "url": "https://github.com/sventura102/pokegen/issues"
+  },
+  "homepage": "https://github.com/sventura102/pokegen#readme"
+}
