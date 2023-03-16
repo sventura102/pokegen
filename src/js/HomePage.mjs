@@ -6,8 +6,7 @@ function homePageTemplate() {
             <h2>Select Pokémons based on generation</h2>
             <form id="generation-form">
                 <label for="generations">Generation:</label>
-                <select name="generations" id="generations" required>
-                </select>
+                <select name="generations" id="generations" required></select>
                 <button type="submit">Show Pokemons!</button>
             </form>
 
@@ -18,25 +17,18 @@ function homePageTemplate() {
 }
 
 function genOptions(genJSON) {
-    return `<option value="${genJSON.results.name}">
-                ${genJSON.results.url.slice(-2, -1)}
-            </option>`;
+    return `<option value="${genJSON.name}">${genJSON.url.slice(-2, -1)}</option>`;
 }
 
 function typeOptions(typeJSON) {
-    return `<label for="${typeJSON.results.name}">
-                ${typeJSON.results.name.charAt(0).toUpperCase() + typeJSON.results.name.slice(1)}
-            </label>
-            <input type="checkbox" name="${typeJSON.results.name}" value="${typeJSON.results.name}">
-            `;
+    return `<input type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
+            <label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}</label>`;
 }
 
 export default class HomePage {
-    constructor(dataSource, genOptionsElement, typeOptionsElement, parentElement) {
+    constructor(dataSource, mainContainer) {
         this.dataSource = dataSource;
-        this.genOptionsElement = genOptionsElement;
-        this.typeOptionsElement = typeOptionsElement;
-        this.parentElement = parentElement;
+        this.mainContainer = mainContainer;
     }
 
     async init () {
@@ -47,10 +39,14 @@ export default class HomePage {
         const typesList = await this.dataSource.getPokeTypes();
 
         //Render Home Page main:
-        renderWithTemplate(homePageTemplate(), this.parentElement);
+        renderWithTemplate(homePageTemplate(), this.mainContainer);
+
+        // Get the options parent elements:
+        const genOptionsElement = document.querySelector("#generations");
+        const typeOptionsElement = document.querySelector("#type-form");
 
         // Render inner form elements:
-        const gens = renderListWithTemplate(genOptions, this.genOptionsElement, generationsList);
-        const types = renderListWithTemplate(typeOptions, this.typeOptionsElement, typesList);
+        renderListWithTemplate(genOptions, genOptionsElement, generationsList);
+        renderListWithTemplate(typeOptions, typeOptionsElement, typesList);
     }
 }
