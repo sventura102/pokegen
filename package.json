@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "- https://poke-gen.netlify.app/",
   "scripts": {
-    "start": "parcel src/index.html",
-    "lint": "eslint *.js src/**/*.js",
-    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\""
+    "start": "parcel src/index.html"
   },
   "repository": {
     "type": "git",
