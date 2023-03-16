@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "- https://poke-gen.netlify.app/",
   "scripts": {
-    "start": "index.html"
+    "start": "parcel src/index.html",
+    "lint": "eslint *.js src/**/*.js",
+    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\""
   },
   "repository": {
     "type": "git",
@@ -13,5 +15,7 @@
   "bugs": {
     "url": "https://github.com/sventura102/pokegen/issues"
   },
-  "homepage": "https://github.com/sventura102/pokegen#readme"
+  "dependencies": {
+    "parcel": "^2.8.3"
+  }
 }
