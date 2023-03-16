@@ -17,6 +17,13 @@ export default class ExternalServices {
         return data.Result;
     }
 
+    // Get JSON of generations (count, results->name[0]->url[1]):
+    async getPokeGenerations() {
+      const response = await fetch(baseURL + "generation/");
+      const data = await convertToJson(response);
+      return data.Result;
+  }
+
     // Gets JSON (with pokemon_species->[6] and types->[7]) from given URL:
     async getPokemonsByGeneration(genNumber) {
         const response = await fetch(baseURL + `generation/${genNumber}/`);
