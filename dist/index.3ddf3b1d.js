@@ -563,10 +563,8 @@ var _externalServicesMjsDefault = parcelHelpers.interopDefault(_externalServices
 var _homePageMjs = require("./HomePage.mjs");
 var _homePageMjsDefault = parcelHelpers.interopDefault(_homePageMjs);
 const dataSource = new (0, _externalServicesMjsDefault.default)();
-const genOptionsElement = document.querySelector("#generations");
-const typeOptionsElement = document.querySelector("type-form");
-const parentElement = document.querySelector(".main-content");
-const homePage = new (0, _homePageMjsDefault.default)(dataSource, genOptionsElement, typeOptionsElement, parentElement);
+const mainContainer = document.querySelector(".main-content");
+const homePage = new (0, _homePageMjsDefault.default)(dataSource, mainContainer);
 homePage.init();
 
 },{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
@@ -585,25 +583,25 @@ class ExternalServices {
     async getPokeTypes() {
         const response = await fetch(baseURL + "type/");
         const data = await convertToJson(response);
-        return data.Result;
+        return data.results;
     }
     // Get JSON of generations (count, results->name[0]->url[1]):
     async getPokeGenerations() {
         const response = await fetch(baseURL + "generation/");
         const data = await convertToJson(response);
-        return data.Result;
+        return data.results;
     }
     // Gets JSON (with pokemon_species->[6] and types->[7]) from given URL:
     async getPokemonsByGeneration(genNumber) {
         const response = await fetch(baseURL + `generation/${genNumber}/`);
         const data = await convertToJson(response);
-        return data.Result;
+        return data.results;
     }
     // Gets JSON (with name->[5] and pokemon->[9]) from given URL:
     async getPokemonsByType(type) {
         const products = await fetch(baseURL + `type/${type}/`);
         const data = await convertToJson(products);
-        return data.Result;
+        return data.results;
     }
 }
 exports.default = ExternalServices;
@@ -648,8 +646,7 @@ function homePageTemplate() {
             <h2>Select Pokémons based on generation</h2>
             <form id="generation-form">
                 <label for="generations">Generation:</label>
-                <select name="generations" id="generations" required>
-                </select>
+                <select name="generations" id="generations" required></select>
                 <button type="submit">Show Pokemons!</button>
             </form>
 
@@ -659,23 +656,16 @@ function homePageTemplate() {
             </form>`;
 }
 function genOptions(genJSON) {
-    return `<option value="${genJSON.results.name}">
-                ${genJSON.results.url.slice(-2, -1)}
-            </option>`;
+    return `<option value="${genJSON.name}">${genJSON.url.slice(-2, -1)}</option>`;
 }
 function typeOptions(typeJSON) {
-    return `<label for="${typeJSON.results.name}">
-                ${typeJSON.results.name.charAt(0).toUpperCase() + typeJSON.results.name.slice(1)}
-            </label>
-            <input type="checkbox" name="${typeJSON.results.name}" value="${typeJSON.results.name}">
-            `;
+    return `<input type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
+            <label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}</label>`;
 }
 class HomePage {
-    constructor(dataSource, genOptionsElement, typeOptionsElement, parentElement){
+    constructor(dataSource, mainContainer){
         this.dataSource = dataSource;
-        this.genOptionsElement = genOptionsElement;
-        this.typeOptionsElement = typeOptionsElement;
-        this.parentElement = parentElement;
+        this.mainContainer = mainContainer;
     }
     async init() {
         // Fill the title with the name of the page:
@@ -684,10 +674,13 @@ class HomePage {
         const generationsList = await this.dataSource.getPokeGenerations();
         const typesList = await this.dataSource.getPokeTypes();
         //Render Home Page main:
-        (0, _utilsMjs.renderWithTemplate)(homePageTemplate(), this.parentElement);
+        (0, _utilsMjs.renderWithTemplate)(homePageTemplate(), this.mainContainer);
+        // Get the options parent elements:
+        const genOptionsElement = document.querySelector("#generations");
+        const typeOptionsElement = document.querySelector("#type-form");
         // Render inner form elements:
-        const gens = (0, _utilsMjs.renderListWithTemplate)(genOptions, this.genOptionsElement, generationsList);
-        const types = (0, _utilsMjs.renderListWithTemplate)(typeOptions, this.typeOptionsElement, typesList);
+        (0, _utilsMjs.renderListWithTemplate)(genOptions, genOptionsElement, generationsList);
+        (0, _utilsMjs.renderListWithTemplate)(typeOptions, typeOptionsElement, typesList);
     }
 }
 exports.default = HomePage;
