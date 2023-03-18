@@ -1,12 +1,13 @@
 # PokeGen
- - https://poke-gen.netlify.app/
+ - https://poke-gen.netlify.app/ (Live)
+ - https://github.com/sventura102/pokegen (GitHub Repository)
 
 ## Description
 
-This is the starting file for our project final Winter 2023 for WDD330. The PokeGen site will display pokemon based off of generation and type per user input.
+Final project for WDD 330 - Web Frontend Development II. The PokeGen site will display pokemon based off of generation and type per user input.
 
 ## Team Members
- - Belen Chaparro
+ - Belén Chaparro
  - Stephanie Ventura
 
 ## Setup
