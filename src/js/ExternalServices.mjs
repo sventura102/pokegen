@@ -37,4 +37,11 @@ export default class ExternalServices {
         return data.results;
     }
 
+    // Find a specific pokémon based on its ID:
+    async findPokemonById(id) {
+        const pokemon = await fetch(baseURL + `pokemon-species/${id}`);
+        const data = await convertToJson(pokemon);
+        return data.results;
+    }
+
 }
