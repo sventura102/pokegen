@@ -693,6 +693,7 @@ class HomePage {
         document.querySelector("#gen-btn").addEventListener("click", ()=>{
             document.querySelector(".main-content").innerHTML = "";
             const category = "generations";
+            console.log(category);
         });
         // Listen for click on the button:
         document.querySelector("#type-btn").addEventListener("click", async ()=>{
