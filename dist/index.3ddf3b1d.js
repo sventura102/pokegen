@@ -689,6 +689,16 @@ class HomePage {
         // Render inner form elements:
         (0, _utilsMjs.renderListWithTemplate)(genOptions, genOptionsElement, generationsList);
         (0, _utilsMjs.renderListWithTemplate)(typeOptions, typeOptionsElement, typesList);
+        // Listen for click on the button:
+        document.querySelector("#gen-btn").addEventListener("click", ()=>{
+            document.querySelector(".main-content").innerHTML = "";
+            const category = "generations";
+        });
+        // Listen for click on the button:
+        document.querySelector("#type-btn").addEventListener("click", async ()=>{
+            document.querySelector(".main-content").innerHTML = "";
+            const category = "types";
+        });
     }
 }
 exports.default = HomePage;
