@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"kcT7V":[function(require,module,exports) {
+})({"8pidU":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -603,6 +603,12 @@ class ExternalServices {
         const data = await convertToJson(products);
         return data.results;
     }
+    // Find a specific pokémon based on its ID:
+    async findPokemonById(id) {
+        const pokemon = await fetch(baseURL + `pokemon-species/${id}`);
+        const data = await convertToJson(pokemon);
+        return data.results;
+    }
 }
 exports.default = ExternalServices;
 
@@ -685,7 +691,7 @@ class HomePage {
 }
 exports.default = HomePage;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./utils.mjs":"6Qrgp"}],"6Qrgp":[function(require,module,exports) {
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Qrgp":[function(require,module,exports) {
 // retrieve data from localstorage
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -735,6 +741,6 @@ function renderWithTemplate(template, parentElement, data, callback) {
     if (callback) callback(data);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["kcT7V","apvF0"], "apvF0", "parcelRequire38ce")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8pidU","apvF0"], "apvF0", "parcelRequire38ce")
 
 //# sourceMappingURL=index.3ddf3b1d.js.map
