@@ -1,11 +1,11 @@
-4287
+4292
 100D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@msgpackr-extract133238395118001717 1
 125D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\css3-tabsize.js133238395141993513 0
 121D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\css-tree\lib\definition-syntax\walk.js133238395147253904 0
 89D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@lezer133238395117671697 1
 82D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\package.json133239207466118873 0
 132D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\Doxyfile133238395151714238 0
-74D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist133239345772953400 1
+74D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist133241791180692370 1
 111D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\css-tree\lib\walker\index.js133238395147903962 0
 113D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\nth-check\lib\compile.d.ts.map133238395153488710 0
 111D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\.bin\node-gyp-build-test.cmd133238395116591616 0
@@ -43,9 +43,9 @@
 102D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\base-x\src\index.js133238395140363390 0
 105D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\supports-color\license133238395154878818 0
 114D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\css-tree\lib\syntax\node\Raw.js133238395147653938 0
-84D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\index.html133239344456448643 0
+84D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\index.html133241607842439182 0
 105D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\nth-check\package.json133238395153648735 0
-76D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js133239321424725755 1
+76D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js133241537910938737 1
 108D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\browserslist\package.json133238395140563412 0
 114D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\regions\AM.js133238395144373690 0
 108D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\supports-color\browser.js133238395154868810 0
@@ -64,14 +64,16 @@
 120D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\transformer-svg\src\inline.js133238395137063149 0
 114D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\regions\MS.js133238395145233757 0
 121D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\yaml\browser\dist\warnings-df54cb69.js133238395156818833 0
-89D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\home-page.js133238395157168856 0
+89D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\home-page.js133241537910938737 0
 97D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\to-regex-range133238395156028772 1
 140D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\css-container-queries-style.js133238395141263461 0
 114D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\regions\ES.js133238395144723714 0
 105D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\timsort\src\timsort.js133238395155998763 0
 131D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\css-select\lib\pseudo-selectors\aliases.d.ts.map133238395146933888 0
 88D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\acorn133238395140283406 1
-89D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\HomePage.mjs133239211346854180 0
+131D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\requests\WriteBundlesRequest.js133238395118971797 0
+84D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\main.js133241537907858518 0
+89D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\HomePage.mjs133241791179312257 0
 131D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\unhandledrejection.js133238395144013662 0
 112D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\css-tree\lib\parser\create.js133238395147373913 0
 93D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\images\pokeball.png133229797455378421 0
@@ -86,11 +88,11 @@
 92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\poke-listing.js133239189432889650 0
 121D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\public\BundleGroup.js133238395118711768 0
 115D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\ordered-binary\.idea\modules.xml133238395153698737 0
-89D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\PokeList.mjs133239192920262701 0
+89D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\PokeList.mjs133241777570130388 0
 129D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\mutationobserver.js133238395143123595 0
 97D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\domhandler\lib133238395148814022 1
 126D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\online-status.js133238395143233608 0
-86D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\router.js133239345772393350 0
+86D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\src\js\router.js133241787912021746 0
 91D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\domutils133238395148994042 1
 146D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\lmdb\dependencies\lmdb-data-v1\libraries\liblmdb\sample-mdb.txt133238395151684249 0
 114D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\regions\SG.js133238395145553787 0
@@ -523,7 +525,7 @@
 90D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\timsort133238395155988772 1
 88D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\tslib133238395156108784 1
 142D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\lmdb\dependencies\lmdb-data-v1\libraries\liblmdb\mdb_stat.c133238395151614239 0
-93D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.0898f127.css133239345666395419 0
+93D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.0898f127.css133241791180602363 0
 125D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\svg-fragment.js133238395143803652 0
 114D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\regions\PA.js133238395145373770 0
 102D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\cosmiconfig\LICENSE133238395146493872 0
@@ -959,8 +961,8 @@
 117D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\type-fest\source\package-json.d.ts133238395156248794 0
 109D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\src\Parcel.js133238395119101809 0
 115D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\type-fest\source\promisable.d.ts133238395156268789 0
-127D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\css-appearance.js133238395141163456 0
 106D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\is-arrayish\.travis.yml133238395150274137 0
+127D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\css-appearance.js133238395141163456 0
 120D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\source-map\dist\utils.js.flow133238395124162180 0
 108D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\types.js133238395119021793 0
 115D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\svgo\plugins\removeDimensions.js133238395155298841 0
@@ -1283,6 +1285,7 @@
 110D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\svgo\plugins\_transforms.js133238395155128822 0
 119D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\caniuse-lite\data\features\path2d.js133238395143283607 0
 112D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\mdn-data\css\definitions.json133238395152549124 0
+96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.8283ee9f.js.map133239345958357280 0
 106D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\svgo\lib\stringifier.js133238395154988815 0
 96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\svgo\lib\svgo133238395155078820 1
 157D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\node-resolver-core\test\fixture\node_modules\package-browser-alias133238395121241958 1
@@ -1578,9 +1581,8 @@
 112D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\nullthrows\nullthrows.js.flow133238395153688735 0
 96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\nth-check\lib133238395153648735 1
 122D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\lib\_is_native_function.js133238395139143301 0
-105D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\json5\lib\unicode.d.ts133238395150604170 0
 129D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\node-resolver-core\test\fixture\foo.js133238395121071944 0
-97D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.0898f127.css.map133239345666435412 0
+97D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.0898f127.css.map133241791180662367 0
 108D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\chalk\source\templates.js133238395146163821 0
 100D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\nth-check\LICENSE133238395153468721 0
 109D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\nth-check\lib\compile.d.ts133238395153478712 0
@@ -1681,6 +1683,7 @@
 111D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\msgpackr-extract\binding.gyp133238395152729135 0
 130D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\lmdb\dependencies\lmdb\libraries\liblmdb\midl.c133238395151874252 0
 140D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\lmdb\dependencies\lmdb-data-v1\libraries\liblmdb\Makefile133238395151494231 0
+96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.5a28cad6.js.map133240112528980843 0
 108D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\msgpackr-extract\index.js133238395152729135 0
 109D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\msgpackr-extract\README.md133238395152709134 0
 124D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\namer-default\src\DefaultNamer.js133238395121011940 0
@@ -1842,7 +1845,7 @@
 100D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\.bin\browserslist133238395116391599 0
 116D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\src\_ts_decorate.mjs133238395139943363 0
 121D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\lmdb\dependencies\lz4\lib\liblz4.pc.in133238395152034269 0
-92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.ccaa3f09.js133239345772913395 0
+92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.ccaa3f09.js133241791180652373 0
 122D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\css-tree\lib\lexer\generic-an-plus-b.js133238395147303908 0
 116D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\lmdb\dependencies\lz4\lib\lz4hc.c133238395152089092 0
 123D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\csso\lib\replace\property\font-weight.js133238395148334005 0
@@ -1951,6 +1954,7 @@
 116D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\css-tree\lib\syntax\node\Ratio.js133238395147653938 0
 103D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\json5\lib\parse.d.ts133238395150564168 0
 103D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\json5\lib\require.js133238395150584167 0
+105D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\json5\lib\unicode.d.ts133238395150604170 0
 101D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\js-tokens\index.js133238395150454149 0
 102D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\json5\lib\util.d.ts133238395150614173 0
 100D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\json5\lib\util.js133238395150624162 0
@@ -3393,8 +3397,8 @@
 108D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\src\_jsx.mjs133238395139803358 0
 122D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\src\_non_iterable_rest.mjs133238395139813364 0
 115D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\utils\src\escape-html.js133238395137503182 0
-130D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\src\_object_without_properties.mjs133238395139843355 0
 114D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@jridgewell\sourcemap-codec\src133238395117461675 1
+130D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\src\_object_without_properties.mjs133238395139843355 0
 136D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\src\_object_without_properties_loose.mjs133238395139843355 0
 107D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\watcher\index.js133238395137933211 0
 132D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@swc\helpers\src\_possible_constructor_return.mjs133238395139853364 0
@@ -3806,7 +3810,7 @@
 124D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\reporter-dev-server\src\Server.js133238395123602135 0
 132D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\reporter-dev-server\src\ServerReporter.js133238395123612139 0
 133D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\reporter-dev-server\src\templates\404.html133238395123622139 0
-96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\pokeball.55115717.ico133239345666315405 0
+96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\pokeball.55115717.ico133241791180572357 0
 133D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\reporter-dev-server\src\templates\500.html133238395123622139 0
 132D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\reporter-dev-server\lib\ServerReporter.js133238395123502132 0
 136D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\reporter-dev-server\lib\ServerReporter.js.map133238395123572125 0
@@ -4117,7 +4121,6 @@
 126D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\requests\PackageRequest.js133238395118931797 0
 131D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\requests\ParcelConfigRequest.js133238395118941807 0
 125D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\requests\TargetRequest.js133238395118961789 0
-131D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\requests\WriteBundlesRequest.js133238395118971797 0
 116D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\public\Config.js133238395118711768 0
 128D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@parcel\core\lib\public\MutableBundleGraph.js133238395118851772 0
 105D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\@jridgewell\source-map133238395117401698 1
@@ -4275,14 +4278,16 @@
 96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\node_modules\.bin\svgo.ps1133238395116661624 0
 92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.3ddf3b1d.js133239211349694401 0
 96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.3ddf3b1d.js.map133239211349734419 0
+92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.5a28cad6.js133240112528900844 0
+92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.8283ee9f.js133239345958267282 0
 92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.b244b04c.js133239207574190295 0
 92D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.b47f6db7.js133239178740506804 0
 96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.b47f6db7.js.map133239178740616805 0
 97D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.b510ed72.css.map133239207574260302 0
 93D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.c5e46a8c.css133239207574180269 0
-93D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.c92073ef.css133239345666395419 0
-97D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.c92073ef.css.map133239345666435412 0
-96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.ccaa3f09.js.map133239345772943403 0
-85D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.html133239345666335408 0
+93D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.c92073ef.css133241791180432371 0
+97D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.c92073ef.css.map133241791180522343 0
+96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.ccaa3f09.js.map133241791180682365 0
+85D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\index.html133241607843509266 0
 96D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\pokeball.bc08afca.ico133239207553878769 0
-100D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\pokemon-logo.6ea04ce1.png133239345666365415 0
+100D:\Belu\BYU-Idaho\WDD330_(Web_Frontend_Dev.2)\Team Repository\pokegen\dist\pokemon-logo.6ea04ce1.png133241791180432371 0
