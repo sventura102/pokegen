@@ -28,13 +28,13 @@ export default class ExternalServices {
     async getPokemonsByGeneration(genNumber) {
         const response = await fetch(baseURL + `generation/${genNumber}/`);
         const data = await convertToJson(response);
-        return data.results;
+        return data.pokemon_species;
     }
     // Gets JSON (with name->[5] and pokemon->[9]) from given URL:
     async getPokemonsByType(type) {
         const products = await fetch(baseURL + `type/${type}/`);
         const data = await convertToJson(products);
-        return data.results;
+        return data.pokemon;
     }
 
     // Find a specific pokémon based on its ID:

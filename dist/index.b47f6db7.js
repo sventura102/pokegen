@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"8pidU":[function(require,module,exports) {
+})({"2VNDD":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "61948a043ddf3b1d";
+module.bundle.HMR_BUNDLE_ID = "95adb8aab47f6db7";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -556,204 +556,89 @@ function hmrAccept(bundle, id) {
     });
 }
 
-},{}],"apvF0":[function(require,module,exports) {
+},{}],"8IrPC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _externalServicesMjs = require("./ExternalServices.mjs");
 var _externalServicesMjsDefault = parcelHelpers.interopDefault(_externalServicesMjs);
-var _homePageMjs = require("./HomePage.mjs");
-var _homePageMjsDefault = parcelHelpers.interopDefault(_homePageMjs);
+var _pokeListMjs = require("./PokeList.mjs");
+var _pokeListMjsDefault = parcelHelpers.interopDefault(_pokeListMjs);
+var _utilsMjs = require("./utils.mjs");
+const category = "";
 const dataSource = new (0, _externalServicesMjsDefault.default)();
 const mainContainer = document.querySelector(".main-content");
-const homePage = new (0, _homePageMjsDefault.default)(dataSource, mainContainer);
-homePage.init();
+const pokeList = new (0, _pokeListMjsDefault.default)(dataSource, mainContainer, category);
+pokeList.init();
+document.querySelector("#gen-btn").addEventListener("click", async ()=>{
+    e.preventDefault();
+    // Check form validity (no empty input fields):
+    var myForm = document.forms[0];
+    var chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if (chk_status) category = "generations";
+});
+document.querySelector("#type-btn").addEventListener("click", async ()=>{
+    e.preventDefault();
+    // Check form validity (no empty input fields):
+    var myForm = document.forms[0];
+    var chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if (chk_status) category = "types";
+});
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const baseURL = "https://pokeapi.co/api/v2/";
-function convertToJson(res) {
-    if (res.ok) return res.json();
-    else throw {
-        name: "servicesError",
-        message: res
-    };
-}
-class ExternalServices {
-    // Get JSON of types (count,results->name[0]->url[1]):
-    async getPokeTypes() {
-        const response = await fetch(baseURL + "type/");
-        const data = await convertToJson(response);
-        return data.results;
-    }
-    // Get JSON of generations (count, results->name[0]->url[1]):
-    async getPokeGenerations() {
-        const response = await fetch(baseURL + "generation/");
-        const data = await convertToJson(response);
-        return data.results;
-    }
-    // Gets JSON (with pokemon_species->[6] and types->[7]) from given URL:
-    async getPokemonsByGeneration(genNumber) {
-        const response = await fetch(baseURL + `generation/${genNumber}/`);
-        const data = await convertToJson(response);
-        return data.pokemon_species;
-    }
-    // Gets JSON (with name->[5] and pokemon->[9]) from given URL:
-    async getPokemonsByType(type) {
-        const products = await fetch(baseURL + `type/${type}/`);
-        const data = await convertToJson(products);
-        return data.pokemon;
-    }
-    // Find a specific pokémon based on its ID:
-    async findPokemonById(id) {
-        const pokemon = await fetch(baseURL + `pokemon-species/${id}`);
-        const data = await convertToJson(pokemon);
-        return data.results;
-    }
-}
-exports.default = ExternalServices;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"dkD60":[function(require,module,exports) {
+},{"./ExternalServices.mjs":"b2hnZ","./PokeList.mjs":"ixoBQ","./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ixoBQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsMjs = require("./utils.mjs");
-function homePageTemplate() {
-    return `<h1>Welcome to the Pokémon Generator!</h1>
-
-            <h2>Select Pokémons based on generation</h2>
-            <form id="generation-form" name="gen-form">
-                <label for="generations">Generation:</label>
-                <select name="generations" id="generations" required></select>
-                <button id="gen-btn" type="submit">Show Pokemons!</button>
-            </form>
-
-            <h2>Select Pokémons based on type</h2>
-            <form id="type-form" name="type-form">
-                <button id="type-btn" type="submit">Show Pokemons!</button>
-            </form>`;
+function pokeListMainTemplate(category) {
+    return `<h1>Pokémon List by ${category}</h1>
+            <h2>These are the pokémons that were introduced in the selected ${category}</h2>
+            <ul class="poke-list"></ul>`;
 }
-function genOptions(genJSON) {
-    return `<option value="${genJSON.name}">${genJSON.url.slice(-2, -1)}</option>`;
+function pokemonListCardTemplate(pokemon) {
+    return `<li class="pokemon-card">
+                <a href="#">
+                    <img src="${pokemon}" alt="Image of ${pokemon}"/>
+                    <h3 class="poke-name">${pokemon}</h3>
+                    <ul class="poke-general">
+                        <p class="poke-color">${pokemon}</p>
+                        <p class="poke-type">${pokemon}</p>
+                        <p class="poke-growth">${pokemon}</p>
+                    </ul>
+                </a>
+            </li>`;
 }
-function typeOptions(typeJSON) {
-    return `<input type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
-            <label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}</label>`;
-}
-class HomePage {
-    constructor(dataSource, mainContainer){
+class PokemonList {
+    constructor(dataSource, mainContainer, category){
         this.dataSource = dataSource;
         this.mainContainer = mainContainer;
+        this.category = category;
+        this.pokeList = [];
     }
     async init() {
+        document.querySelector(".main-content").innerHTML = "";
+        //Render PokeList main:
+        (0, _utilsMjs.renderWithTemplate)(pokeListMainTemplate(this.category), this.mainContainer);
         // Fill the title with the name of the page:
-        document.querySelector(".page-title").textContent = "Home Page | Pok\xe9Gen";
-        // Add footer year:
-        document.querySelector("#footer-year").textContent = new Date().getFullYear();
-        // Await promise from dataSource:
-        const generationsList = await this.dataSource.getPokeGenerations();
-        const typesList = await this.dataSource.getPokeTypes();
-        //Render Home Page main:
-        (0, _utilsMjs.renderWithTemplate)(homePageTemplate(), this.mainContainer);
-        // Get the options parent elements:
-        const genOptionsElement = document.querySelector("#generations");
-        const typeOptionsElement = document.querySelector("#type-form");
-        // Render inner form elements:
-        (0, _utilsMjs.renderListWithTemplate)(genOptions, genOptionsElement, generationsList);
-        (0, _utilsMjs.renderListWithTemplate)(typeOptions, typeOptionsElement, typesList);
-        // Listen for click on the button:
-        document.querySelector("#gen-btn").addEventListener("click", ()=>{
-            document.querySelector(".main-content").innerHTML = "";
-            const category = "generations";
-            console.log(category);
-        });
-        // Listen for click on the button:
-        document.querySelector("#type-btn").addEventListener("click", async ()=>{
-            document.querySelector(".main-content").innerHTML = "";
-            const category = "types";
+        document.querySelector(".page-title").textContent = `Pokémon List by ${this.category} | PokéGen`;
+        // Listening for click on the generation form button:
+        document.querySelector("#gen-btn").addEventListener("click", (e)=>{
+            e.preventDefault();
+            // Check form validity (no empty input fields):
+            var myForm = document.forms[0];
+            var chk_status = myForm.checkValidity();
+            myForm.reportValidity();
+            if (chk_status) {
+                let generation = document.getElementById("generations").options[e.selectedIndex].text;
+                console.log(generation);
+                const genList = this.dataSource.getPokemonsByGeneration(generation);
+                // Render the list:
+                (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, this.listElement, list, "afterbegin");
+            }
         });
     }
 }
-exports.default = HomePage;
+exports.default = PokemonList;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./utils.mjs":"6Qrgp"}],"6Qrgp":[function(require,module,exports) {
-// retrieve data from localstorage
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getLocalStorage", ()=>getLocalStorage);
-parcelHelpers.export(exports, "setLocalStorage", ()=>setLocalStorage);
-// set a listener for both touchend and click
-parcelHelpers.export(exports, "setClick", ()=>setClick);
-//create new function getParam that will get the parameter from the URL
-parcelHelpers.export(exports, "getParam", ()=>getParam);
-parcelHelpers.export(exports, "renderListWithTemplate", ()=>renderListWithTemplate);
-parcelHelpers.export(exports, "renderWithTemplate", ()=>renderWithTemplate);
-function getLocalStorage(key) {
-    return JSON.parse(localStorage.getItem(key));
-}
-function setLocalStorage(key, data) {
-    let jsonData;
-    try {
-        jsonData = JSON.stringify(data);
-    } catch (e) {
-        console.error(`Error parsing data to JSON: ${e}`);
-        return;
-    }
-    localStorage.setItem(key, jsonData);
-}
-function setClick(selector, callback) {
-    qs(selector).addEventListener("touchend", (event)=>{
-        event.preventDefault();
-        callback();
-    });
-    qs(selector).addEventListener("click", callback);
-}
-function getParam(param) {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const pokemon = urlParams.get(param);
-    return pokemon;
-}
-function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
-    const htmlStrings = list.map(templateFn);
-    // if clear is true we need to clear out the contents of the parent.
-    if (clear == true) parentElement.innerHTML = "";
-    parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
-}
-function renderWithTemplate(template, parentElement, data, callback) {
-    parentElement.insertAdjacentHTML("afterbegin", template);
-    //if there is a callback...call it and pass data
-    if (callback) callback(data);
-}
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2VNDD","8IrPC"], "8IrPC", "parcelRequire38ce")
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8pidU","apvF0"], "apvF0", "parcelRequire38ce")
-
-//# sourceMappingURL=index.3ddf3b1d.js.map
+//# sourceMappingURL=index.b47f6db7.js.map
