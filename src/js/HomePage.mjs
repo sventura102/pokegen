@@ -1,12 +1,11 @@
-import {renderListWithTemplate, renderWithTemplate} from "./utils.mjs";
-
+import {renderListWithTemplate, renderWithTemplate, setLocalStorage} from "./utils.mjs";
 function homePageTemplate() {
     return `<h1>Welcome to the Pokémon Generator!</h1>
 
             <h2>Select Pokémons based on generation</h2>
             <form id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
-                <select name="generations" id="generations" required></select>
+                <select id="gen-select" required></select>
                 <button id="gen-btn" type="submit">Show Pokemons!</button>
             </form>
 
@@ -21,10 +20,21 @@ function genOptions(genJSON) {
 }
 
 function typeOptions(typeJSON) {
-    return `<input type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
+    return `<input class="type" type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
             <label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}</label>`;
 }
 
+function getCheckedTypes() {
+    let types = document.querySelectorAll(".type");
+    let typesChecked = [];
+    for (let i = 0; i < types.length; i++) {
+        if (types[i].checked == true){
+            let type = types[i].value;
+            typesChecked.push(type);
+          }
+    }
+    setLocalStorage("types", typesChecked);
+}
 export default class HomePage {
     constructor(dataSource, mainContainer) {
         this.dataSource = dataSource;
@@ -46,11 +56,46 @@ export default class HomePage {
         renderWithTemplate(homePageTemplate(), this.mainContainer);
 
         // Get the options parent elements:
-        const genOptionsElement = document.querySelector("#generations");
+        const genOptionsElement = document.querySelector("#gen-select");
         const typeOptionsElement = document.querySelector("#type-form");
 
         // Render inner form elements:
         renderListWithTemplate(genOptions, genOptionsElement, generationsList);
         renderListWithTemplate(typeOptions, typeOptionsElement, typesList);
+
+        // Listen for click on the button:
+        document.querySelector("#gen-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            // Check form validity (no empty input fields):
+            var myForm = document.forms[0];
+            var chk_status = myForm.checkValidity();
+            myForm.reportValidity();
+            if (chk_status) {
+                const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
+                setLocalStorage("category", "generations");
+                setLocalStorage("generation", `${generation}`);
+
+            }
+        });
+
+        // Listen for click on the button:
+        document.querySelector("#type-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            // Check form validity (no empty input fields):
+            var myForm = document.forms[0];
+            var chk_status = myForm.checkValidity();
+            myForm.reportValidity();
+            if (chk_status) {
+                getCheckedTypes();
+                setLocalStorage("category", "types");
+                location.assign("#/poke-list");
+            }
+            
+        });
     }
 }
+
+// const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
+// document.querySelector("#send-gen").value = generation;
+
+//<input type="hidden" name="generation" value="" id="send-type">
