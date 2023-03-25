@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"8pidU":[function(require,module,exports) {
+})({"egcxg":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "61948a043ddf3b1d";
+module.bundle.HMR_BUNDLE_ID = "eee974a1ccaa3f09";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -556,18 +556,59 @@ function hmrAccept(bundle, id) {
     });
 }
 
-},{}],"apvF0":[function(require,module,exports) {
+},{}],"jSUBV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initRouter", ()=>initRouter);
 var _externalServicesMjs = require("./ExternalServices.mjs");
 var _externalServicesMjsDefault = parcelHelpers.interopDefault(_externalServicesMjs);
 var _homePageMjs = require("./HomePage.mjs");
 var _homePageMjsDefault = parcelHelpers.interopDefault(_homePageMjs);
-const dataSource = new (0, _externalServicesMjsDefault.default)();
+var _pokeListMjs = require("./PokeList.mjs");
+var _pokeListMjsDefault = parcelHelpers.interopDefault(_pokeListMjs);
 const mainContainer = document.querySelector(".main-content");
-const homePage = new (0, _homePageMjsDefault.default)(dataSource, mainContainer);
-homePage.init();
+// Delete previous main content:
+mainContainer.innerHtml = "";
+const dataSource = new (0, _externalServicesMjsDefault.default)();
+initRouter(dataSource, mainContainer);
+function initRouter(dataSource, mainContainer) {
+    function hashToRoute(hash) {
+        switch(hash){
+            case "#/home-page":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                const homePage = new (0, _homePageMjsDefault.default)(dataSource, mainContainer);
+                homePage.init();
+                break;
+            case "#/poke-list":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                const pokeList = new (0, _pokeListMjsDefault.default)(dataSource, mainContainer);
+                pokeList.init();
+                break;
+            case "#/page3":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                break;
+            default:
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                updateView(createElement("h3", {
+                    textContent: "404 Page Not Found"
+                }));
+                break;
+        }
+    }
+    const defaultHash = window.location.hash || "#/home-page";
+    hashToRoute(defaultHash);
+    window.addEventListener("hashchange", (e)=>{
+        const newUrl = new URL(e.newURL);
+        const hash = newUrl.hash;
+        hashToRoute(hash);
+    });
+}
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
+},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const baseURL = "https://pokeapi.co/api/v2/";
@@ -602,12 +643,6 @@ class ExternalServices {
         const products = await fetch(baseURL + `type/${type}/`);
         const data = await convertToJson(products);
         return data.pokemon;
-    }
-    // Find a specific pokémon based on its ID:
-    async findPokemonById(id) {
-        const pokemon = await fetch(baseURL + `pokemon-species/${id}`);
-        const data = await convertToJson(pokemon);
-        return data.results;
     }
     // Find a specific pokémon based on its ID:
     async findPokemonById(id) {
@@ -658,7 +693,7 @@ function homePageTemplate() {
             <h2>Select Pokémons based on generation</h2>
             <form id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
-                <select name="generations" id="generations" required></select>
+                <select id="gen-select" required></select>
                 <button id="gen-btn" type="submit">Show Pokemons!</button>
             </form>
 
@@ -671,8 +706,17 @@ function genOptions(genJSON) {
     return `<option value="${genJSON.name}">${genJSON.url.slice(-2, -1)}</option>`;
 }
 function typeOptions(typeJSON) {
-    return `<input type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
+    return `<input class="type" type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
             <label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}</label>`;
+}
+function getCheckedTypes() {
+    let types = document.querySelectorAll(".type");
+    let typesChecked = [];
+    for(let i = 0; i < types.length; i++)if (types[i].checked == true) {
+        let type = types[i].value;
+        typesChecked.push(type);
+    }
+    (0, _utilsMjs.setLocalStorage)("types", typesChecked);
 }
 class HomePage {
     constructor(dataSource, mainContainer){
@@ -690,24 +734,41 @@ class HomePage {
         //Render Home Page main:
         (0, _utilsMjs.renderWithTemplate)(homePageTemplate(), this.mainContainer);
         // Get the options parent elements:
-        const genOptionsElement = document.querySelector("#generations");
+        const genOptionsElement = document.querySelector("#gen-select");
         const typeOptionsElement = document.querySelector("#type-form");
         // Render inner form elements:
         (0, _utilsMjs.renderListWithTemplate)(genOptions, genOptionsElement, generationsList);
         (0, _utilsMjs.renderListWithTemplate)(typeOptions, typeOptionsElement, typesList);
         // Listen for click on the button:
-        document.querySelector("#gen-btn").addEventListener("click", ()=>{
-            document.querySelector(".main-content").innerHTML = "";
-            const category = "generations";
-            console.log(category);
+        document.querySelector("#gen-btn").addEventListener("click", (e)=>{
+            e.preventDefault();
+            // Check form validity (no empty input fields):
+            var myForm = document.forms[0];
+            var chk_status = myForm.checkValidity();
+            myForm.reportValidity();
+            if (chk_status) {
+                const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
+                (0, _utilsMjs.setLocalStorage)("category", "generations");
+                (0, _utilsMjs.setLocalStorage)("generation", `${generation}`);
+            }
         });
         // Listen for click on the button:
-        document.querySelector("#type-btn").addEventListener("click", async ()=>{
-            document.querySelector(".main-content").innerHTML = "";
-            const category = "types";
+        document.querySelector("#type-btn").addEventListener("click", (e)=>{
+            e.preventDefault();
+            // Check form validity (no empty input fields):
+            var myForm = document.forms[0];
+            var chk_status = myForm.checkValidity();
+            myForm.reportValidity();
+            if (chk_status) {
+                getCheckedTypes();
+                (0, _utilsMjs.setLocalStorage)("category", "types");
+                location.assign("#/poke-list");
+            }
         });
     }
-}
+} // const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
+ // document.querySelector("#send-gen").value = generation;
+ //<input type="hidden" name="generation" value="" id="send-type">
 exports.default = HomePage;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Qrgp":[function(require,module,exports) {
@@ -760,6 +821,52 @@ function renderWithTemplate(template, parentElement, data, callback) {
     if (callback) callback(data);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8pidU","apvF0"], "apvF0", "parcelRequire38ce")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ixoBQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "pokeListMainTemplate", ()=>pokeListMainTemplate);
+parcelHelpers.export(exports, "pokemonListCardTemplate", ()=>pokemonListCardTemplate);
+var _utilsMjs = require("./utils.mjs");
+function pokeListMainTemplate(category) {
+    return `<h1>Pokémon List by ${category}</h1>
+            <h2>These are the pokémons that were introduced in the selected ${category}</h2>
+            <ul class="poke-list"></ul>`;
+}
+function pokemonListCardTemplate(pokemon) {
+    return `<li class="pokemon-card">
+                <a href="#">
+                    <img src="${pokemon}" alt="Image of ${pokemon}"/>
+                    <h3 class="poke-name">${pokemon}</h3>
+                    <ul class="poke-general">
+                        <p class="poke-color">${pokemon}</p>
+                        <p class="poke-type">${pokemon}</p>
+                        <p class="poke-growth">${pokemon}</p>
+                    </ul>
+                </a>
+            </li>`;
+}
+class PokemonList {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+        this.category = (0, _utilsMjs.getLocalStorage)("category");
+        this.pokeList = [];
+    }
+    async init() {
+        // Render PokeList main:
+        (0, _utilsMjs.renderWithTemplate)(pokeListMainTemplate(this.category), this.mainContainer);
+        // Fill the title with the name of the page:
+        document.querySelector(".page-title").textContent = `Pokémon List by ${this.category} | PokéGen`;
+        // Get number of generation from LocalStorage:
+        let generation = (0, _utilsMjs.getLocalStorage)("generation");
+        console.log(generation);
+        // Render list of generations:
+        const genList = this.dataSource.getPokemonsByGeneration(generation);
+        (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, this.listElement, genList, "afterbegin");
+    }
+}
+exports.default = PokemonList;
 
-//# sourceMappingURL=index.3ddf3b1d.js.map
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
+
+//# sourceMappingURL=index.ccaa3f09.js.map
