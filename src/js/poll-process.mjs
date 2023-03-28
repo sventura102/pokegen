@@ -62,13 +62,17 @@ function showResults (){
 //Comment Section
 export function addComment() {
     return `<div class ="comments">
-            <h2>Leave Us A Comment</h2>
-            <form>
+            <h2>Leave Your Comments</h2>
+            <form id=comment-form>
+                <label for="fullName">Name:</label>
+                <input type="fullName" name="fullName" id="fullName" required>
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" required>
                 <textarea placeholder='Add Your Comment'></textarea>
                 <div class="button">
                     input type="submit" value="Comment">
                     <button>Cancel</button>
                 </div>
             </form>
-            </div>`
+            </div>`;
 }
