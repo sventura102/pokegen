@@ -42,6 +42,12 @@ export default class HomePage {
     }
 
     async init () {
+        setLocalStorage("votes", {
+            "victini" : 3,
+            "meowth" : 5,
+            "bulbasaur" : 2,
+            "pikachu" : 15
+        })
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | PokéGen";
 
@@ -64,8 +70,7 @@ export default class HomePage {
         renderListWithTemplate(typeOptions, typeOptionsElement, typesList);
 
         // Listen for click on the button:
-        document.querySelector("#gen-btn").addEventListener("click", (e) => {
-            e.preventDefault();
+        document.querySelector("#gen-btn").addEventListener("click", () => {
             // Check form validity (no empty input fields):
             var myForm = document.forms[0];
             var chk_status = myForm.checkValidity();
@@ -74,13 +79,11 @@ export default class HomePage {
                 const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
                 setLocalStorage("category", "generations");
                 setLocalStorage("generation", `${generation}`);
-
             }
         });
 
         // Listen for click on the button:
-        document.querySelector("#type-btn").addEventListener("click", (e) => {
-            e.preventDefault();
+        document.querySelector("#type-btn").addEventListener("click", () => {
             // Check form validity (no empty input fields):
             var myForm = document.forms[0];
             var chk_status = myForm.checkValidity();
@@ -88,7 +91,7 @@ export default class HomePage {
             if (chk_status) {
                 getCheckedTypes();
                 setLocalStorage("category", "types");
-                location.assign("#/poke-list");
+                location.assign("/#/poke-list");
             }
             
         });
