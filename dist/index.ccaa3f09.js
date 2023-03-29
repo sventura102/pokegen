@@ -566,9 +566,8 @@ var _homePageMjs = require("./HomePage.mjs");
 var _homePageMjsDefault = parcelHelpers.interopDefault(_homePageMjs);
 var _pokeListMjs = require("./PokeList.mjs");
 var _pokeListMjsDefault = parcelHelpers.interopDefault(_pokeListMjs);
+//import PokemonVotingPoll from "./poll-process.mjs";
 const mainContainer = document.querySelector(".main-content");
-// Delete previous main content:
-mainContainer.innerHtml = "";
 const dataSource = new (0, _externalServicesMjsDefault.default)();
 initRouter(dataSource, mainContainer);
 function initRouter(dataSource, mainContainer) {
@@ -586,16 +585,15 @@ function initRouter(dataSource, mainContainer) {
                 const pokeList = new (0, _pokeListMjsDefault.default)(dataSource, mainContainer);
                 pokeList.init();
                 break;
-            case "#/page3":
+            case "#/":
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
+                const pokePoll = new PokemonVotingPoll(dataSource, mainContainer);
+                pokePoll.init();
                 break;
             default:
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
-                updateView(createElement("h3", {
-                    textContent: "404 Page Not Found"
-                }));
                 break;
         }
     }
@@ -691,14 +689,14 @@ function homePageTemplate() {
     return `<h1>Welcome to the Pokémon Generator!</h1>
 
             <h2>Select Pokémons based on generation</h2>
-            <form id="generation-form" name="gen-form">
+            <form action="/#/poke-list" id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
                 <select id="gen-select" required></select>
                 <button id="gen-btn" type="submit">Show Pokemons!</button>
             </form>
 
             <h2>Select Pokémons based on type</h2>
-            <form id="type-form" name="type-form">
+            <form action="/#/poke-list" id="type-form" name="type-form">
                 <button id="type-btn" type="submit">Show Pokemons!</button>
             </form>`;
 }
@@ -724,6 +722,12 @@ class HomePage {
         this.mainContainer = mainContainer;
     }
     async init() {
+        (0, _utilsMjs.setLocalStorage)("votes", {
+            "victini": 3,
+            "meowth": 5,
+            "bulbasaur": 2,
+            "pikachu": 15
+        });
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | Pok\xe9Gen";
         // Add footer year:
@@ -740,8 +744,7 @@ class HomePage {
         (0, _utilsMjs.renderListWithTemplate)(genOptions, genOptionsElement, generationsList);
         (0, _utilsMjs.renderListWithTemplate)(typeOptions, typeOptionsElement, typesList);
         // Listen for click on the button:
-        document.querySelector("#gen-btn").addEventListener("click", (e)=>{
-            e.preventDefault();
+        document.querySelector("#gen-btn").addEventListener("click", ()=>{
             // Check form validity (no empty input fields):
             var myForm = document.forms[0];
             var chk_status = myForm.checkValidity();
@@ -753,8 +756,7 @@ class HomePage {
             }
         });
         // Listen for click on the button:
-        document.querySelector("#type-btn").addEventListener("click", (e)=>{
-            e.preventDefault();
+        document.querySelector("#type-btn").addEventListener("click", ()=>{
             // Check form validity (no empty input fields):
             var myForm = document.forms[0];
             var chk_status = myForm.checkValidity();
@@ -762,7 +764,7 @@ class HomePage {
             if (chk_status) {
                 getCheckedTypes();
                 (0, _utilsMjs.setLocalStorage)("category", "types");
-                location.assign("#/poke-list");
+                location.assign("/#/poke-list");
             }
         });
     }
