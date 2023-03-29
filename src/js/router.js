@@ -38,7 +38,7 @@ export function initRouter(dataSource, mainContainer) {
             default:
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
-                updateView(createElement("h3",  {textContent: "404 Page Not Found"}));
+                //updateView(createElement("h3",  {textContent: "404 Page Not Found"}));
                 break;
         }
     }
