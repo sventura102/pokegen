@@ -3,14 +3,14 @@ function homePageTemplate() {
     return `<h1>Welcome to the Pokémon Generator!</h1>
 
             <h2>Select Pokémons based on generation</h2>
-            <form id="generation-form" name="gen-form">
+            <form action="/#/poke-list" id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
                 <select id="gen-select" required></select>
                 <button id="gen-btn" type="submit">Show Pokemons!</button>
             </form>
 
             <h2>Select Pokémons based on type</h2>
-            <form id="type-form" name="type-form">
+            <form action="/#/poke-list" id="type-form" name="type-form">
                 <button id="type-btn" type="submit">Show Pokemons!</button>
             </form>`;
 }
