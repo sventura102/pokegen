@@ -1,11 +1,10 @@
 import ExternalServices from "./ExternalServices.mjs";
 import HomePage from "./HomePage.mjs";
 import PokemonList from "./PokeList.mjs";
+//import PokemonVotingPoll from "./poll-process.mjs";
 
 
 const mainContainer = document.querySelector(".main-content");
-// Delete previous main content:
-mainContainer.innerHtml = "";
 const dataSource = new ExternalServices();
 initRouter(dataSource, mainContainer);
 
@@ -29,16 +28,17 @@ export function initRouter(dataSource, mainContainer) {
 
                 break;
 
-            case "#/page3":
+            case "#/":
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
-
+                const pokePoll = new PokemonVotingPoll(dataSource, mainContainer);
+                pokePoll.init();
                 break;
 
             default:
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
-                updateView(createElement("h3",  {textContent: "404 Page Not Found"}));
+                //updateView(createElement("h3",  {textContent: "404 Page Not Found"}));
                 break;
         }
     }

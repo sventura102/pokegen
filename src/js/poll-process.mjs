@@ -1,7 +1,30 @@
-export function pokemonVotingPoll() {
+
+
+
+export default class PokemonVotingPoll {
+    constructor(dataSource, mainContainer) {
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+
+    async init() {
+        // Fill the title with the name of the page:
+        document.querySelector(".page-title").textContent = "Poll Page | PokéGen";
+
+        // Await promise from dataSource:
+
+        //Render Poll Page main:
+
+        // Get the options parent elements:
+
+        // Listen for click on the button:
+    }
+}
+
+function pollTemplate() {
     return `<div class="poll">
-                <div class="questions"></div>
-            </div>;`
+                <div class="top-pokemons"></div>
+            </div>;`;
 }
 //display poll question and options
 let poll = {
@@ -60,7 +83,7 @@ function showResults (){
 
 
 //Comment Section
-export function addComment() {
+function addComment() {
     return `<div class ="comments">
             <h2>Leave Your Comments</h2>
             <form id=comment-form>
@@ -74,5 +97,31 @@ export function addComment() {
                     <button>Cancel</button>
                 </div>
             </form>
+<<<<<<< HEAD
             </div>`;
+=======
+            </div>`
+}
+
+// Store votes:
+setLocalStorage("votes", {
+    "victini" : 3,
+    "meowth" : 5,
+    "bulbasaur" : 2,
+    "pikachu" : 15
+})
+
+// 
+function showResults () {
+    const pokeVotes = getLocalStorage(this.key);
+    if (pokeVotes != null) {
+        let topPokemons = [];
+
+        // Go through the list of pokemons with votes and 
+        // get the top 4 with most votes:
+        const htmlItems = pokeVotes.map((pokemon) => { }
+      );
+    }
+
+>>>>>>> a1705678e69585b717095f448f76e893237b8c0f
 }
