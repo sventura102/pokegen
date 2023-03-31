@@ -12,6 +12,19 @@ function signupPageTemplate() {
 let signupBtn = document.getElementById("signup-btn");
 let username = document.getElementById("user-name");
 
+export default class SignUp {
+    constructor(dataSource, mainContainer) {
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
 async init() {
+    //Fill title with the name of the page:
+    document.querySelector(".page-title").textContent = "Sign Up | PokéGen";
+
+    //Render SignUp main:
+    renderWithTemplate(signupPageTemplate(), this.mainContainer);
+
     
+
+    }
 }
