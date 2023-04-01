@@ -1,25 +1,4 @@
-
-
-
-export default class PokemonVotingPoll {
-    constructor(dataSource, mainContainer) {
-        this.dataSource = dataSource;
-        this.mainContainer = mainContainer;
-    }
-
-    async init() {
-        // Fill the title with the name of the page:
-        document.querySelector(".page-title").textContent = "Poll Page | PokéGen";
-
-        // Await promise from dataSource:
-
-        //Render Poll Page main:
-
-        // Get the options parent elements:
-
-        // Listen for click on the button:
-    }
-}
+import { renderListWithTemplate, renderWithTemplate } from "./utils.mjs";
 
 function pollTemplate() {
     return `<div class="poll">
@@ -81,7 +60,6 @@ function showResults (){
     }
 }
 
-
 //Comment Section
 function addComment() {
     return `<div class ="comments">
@@ -97,10 +75,7 @@ function addComment() {
                     <button>Cancel</button>
                 </div>
             </form>
-<<<<<<< HEAD
             </div>`;
-=======
-            </div>`
 }
 
 // Store votes:
@@ -122,6 +97,26 @@ function showResults () {
         const htmlItems = pokeVotes.map((pokemon) => { }
       );
     }
+};
 
->>>>>>> a1705678e69585b717095f448f76e893237b8c0f
+export default class PokemonVotingPoll {
+    constructor(dataSource, mainContainer) {
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+
+    async init() {
+        // Fill the title with the name of the page:
+        document.querySelector(".page-title").textContent = "Poll Page | PokéGen";
+
+        // Await promise from dataSource:
+
+        //Render Poll Page main:
+        renderWithTemplate(pollTemplate(), this.mainContainer);
+
+        // Get the options parent elements:
+
+        // Listen for click on the button:
+
+    }
 }
