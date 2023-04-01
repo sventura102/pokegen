@@ -1,4 +1,5 @@
 import {renderListWithTemplate, renderWithTemplate, setLocalStorage} from "./utils.mjs";
+
 function homePageTemplate() {
     return `<h1>Welcome to the Pokémon Generator!</h1>
 
@@ -42,12 +43,7 @@ export default class HomePage {
     }
 
     async init () {
-        setLocalStorage("votes", {
-            "victini" : 3,
-            "meowth" : 5,
-            "bulbasaur" : 2,
-            "pikachu" : 15
-        })
+
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | PokéGen";
 
@@ -77,7 +73,7 @@ export default class HomePage {
             myForm.reportValidity();
             if (chk_status) {
                 const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
-                setLocalStorage("category", "generations");
+                setLocalStorage("category", "generation");
                 setLocalStorage("generation", `${generation}`);
             }
         });
@@ -91,14 +87,8 @@ export default class HomePage {
             if (chk_status) {
                 getCheckedTypes();
                 setLocalStorage("category", "types");
-                location.assign("/#/poke-list");
             }
             
         });
     }
 }
-
-// const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
-// document.querySelector("#send-gen").value = generation;
-
-//<input type="hidden" name="generation" value="" id="send-type">
