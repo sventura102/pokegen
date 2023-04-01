@@ -722,12 +722,6 @@ class HomePage {
         this.mainContainer = mainContainer;
     }
     async init() {
-        (0, _utilsMjs.setLocalStorage)("votes", {
-            "victini": 3,
-            "meowth": 5,
-            "bulbasaur": 2,
-            "pikachu": 15
-        });
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | Pok\xe9Gen";
         // Add footer year:
@@ -751,7 +745,7 @@ class HomePage {
             myForm.reportValidity();
             if (chk_status) {
                 const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
-                (0, _utilsMjs.setLocalStorage)("category", "generations");
+                (0, _utilsMjs.setLocalStorage)("category", "generation");
                 (0, _utilsMjs.setLocalStorage)("generation", `${generation}`);
             }
         });
@@ -764,13 +758,10 @@ class HomePage {
             if (chk_status) {
                 getCheckedTypes();
                 (0, _utilsMjs.setLocalStorage)("category", "types");
-                location.assign("/#/poke-list");
             }
         });
     }
-} // const generation = document.getElementById("gen-select").options[document.getElementById("gen-select").selectedIndex].text;
- // document.querySelector("#send-gen").value = generation;
- //<input type="hidden" name="generation" value="" id="send-type">
+}
 exports.default = HomePage;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Qrgp":[function(require,module,exports) {
@@ -826,24 +817,17 @@ function renderWithTemplate(template, parentElement, data, callback) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ixoBQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "pokeListMainTemplate", ()=>pokeListMainTemplate);
-parcelHelpers.export(exports, "pokemonListCardTemplate", ()=>pokemonListCardTemplate);
 var _utilsMjs = require("./utils.mjs");
 function pokeListMainTemplate(category) {
     return `<h1>Pokémon List by ${category}</h1>
             <h2>These are the pokémons that were introduced in the selected ${category}</h2>
-            <ul class="poke-list"></ul>`;
+            <ul class="pokemon-list"></ul>`;
 }
 function pokemonListCardTemplate(pokemon) {
     return `<li class="pokemon-card">
-                <a href="#">
-                    <img src="${pokemon}" alt="Image of ${pokemon}"/>
-                    <h3 class="poke-name">${pokemon}</h3>
-                    <ul class="poke-general">
-                        <p class="poke-color">${pokemon}</p>
-                        <p class="poke-type">${pokemon}</p>
-                        <p class="poke-growth">${pokemon}</p>
-                    </ul>
+                <a href="/#/poke-details">
+                    <h3 class="poke-name">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
+                    <p>${pokemon.url}</p>
                 </a>
             </li>`;
 }
@@ -853,20 +837,30 @@ class PokemonList {
         this.mainContainer = mainContainer;
         this.category = (0, _utilsMjs.getLocalStorage)("category");
         this.pokeList = [];
+        this.listElement = document.querySelector(".pokemon-list");
     }
     async init() {
-        // Render PokeList main:
-        (0, _utilsMjs.renderWithTemplate)(pokeListMainTemplate(this.category), this.mainContainer);
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = `Pokémon List by ${this.category} | PokéGen`;
+        // Render PokeList main:
+        (0, _utilsMjs.renderWithTemplate)(pokeListMainTemplate(this.category), this.mainContainer);
         // Get number of generation from LocalStorage:
         let generation = (0, _utilsMjs.getLocalStorage)("generation");
-        console.log(generation);
+        // Await promise from dataSource:
+        this.pokeList = await this.dataSource.getPokemonsByGeneration(generation);
         // Render list of generations:
-        const genList = this.dataSource.getPokemonsByGeneration(generation);
-        (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, this.listElement, genList, "afterbegin");
+        (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, this.listElement, this.pokeList);
     }
+} /* <img src="${pokemon}" alt="Image of ${pokemon}"/>
+<p class="poke-color">${pokemon}</p>
+<p class="poke-type">${pokemon}</p>
+<p class="poke-growth">${pokemon}</p> */  /*
+addProductToCart() {
+    let cart = getLocalStorage("so-cart") || [];
+    cart.push(this.product);
+    setLocalStorage("so-cart", cart);
 }
+      */ 
 exports.default = PokemonList;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
