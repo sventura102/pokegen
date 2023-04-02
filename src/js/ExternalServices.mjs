@@ -22,7 +22,7 @@ export default class ExternalServices {
       const response = await fetch(baseURL + "generation/");
       const data = await convertToJson(response);
       return data.results;
-  }
+    }
 
     // Gets JSON (with pokemon_species->[6] and types->[7]) from given URL:
     async getPokemonsByGeneration(genNumber) {
@@ -39,9 +39,9 @@ export default class ExternalServices {
 
     // Find a specific pokémon based on its ID:
     async findPokemonById(id) {
-        const pokemon = await fetch(baseURL + `pokemon-species/${id}`);
+        const pokemon = await fetch(baseURL + `pokemon/${id}`);
         const data = await convertToJson(pokemon);
-        return data.results;
+        return data;
     }
 
 }
