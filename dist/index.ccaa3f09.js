@@ -831,10 +831,10 @@ function pokeListMainTemplate(category) {
 }
 function pokemonListCardTemplate(pokemon) {
     return `<li class="pokemon-card">
-                <a href="/#/poke-details">
+                <a href="/#/poke-details" id="${pokemon.id}">
                     <h3 class="poke-name">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
                 </a>
-                <button type="submit" id="${pokemon.id}" value="${pokemon.name}">Vote for Me!</button>
+                <button type="submit" id="${pokemon.name}">Vote for Me!</button>
             </li>`;
 }
 class PokemonList {
@@ -872,19 +872,25 @@ class PokemonList {
         (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, pokemonListElement, this.pokeList);
         // Listen for click on button:
         document.querySelectorAll("button").forEach((occurence)=>{
-            let id = occurence.getAttribute("id");
-            let name = occurence.getAttribute("value");
+            let name = occurence.getAttribute("id");
             occurence.addEventListener("click", function() {
                 let voteList = (0, _utilsMjs.getLocalStorage)("votes");
-                console.log(name);
+                // Check pokemons inside the votes object:
                 for(const pokemon in voteList)if (pokemon == name) {
                     if (voteList[pokemon] > 0) voteList[pokemon] += 1;
                     else voteList[pokemon] = 1;
                 } else Object.assign(voteList, {
                     [name]: 1
                 });
+                // Set new values in localStorage:
                 (0, _utilsMjs.setLocalStorage)("votes", voteList);
-            // name: John Doe
+            });
+        });
+        // Listen for click on the link to set pokémon ID in localStorage:s
+        document.querySelectorAll("a").forEach((occurence)=>{
+            let id = occurence.getAttribute("id");
+            occurence.addEventListener("click", function() {
+                (0, _utilsMjs.setLocalStorage)("pokeId", id);
             });
         });
     }
