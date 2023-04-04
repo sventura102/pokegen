@@ -11,7 +11,7 @@ function pokemonListCardTemplate(pokemon) {
                 <a href="/#/poke-details">
                     <h3 class="poke-name">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
                 </a>
-                <button type="submit" id="${pokemon.id} value="${pokemon.name}">Vote for Me!</button>
+                <button type="submit" id="${pokemon.id}" value="${pokemon.name}">Vote for Me!</button>
             </li>`;
 }
 
@@ -60,26 +60,34 @@ export default class PokemonList {
     // Render list of generations:
     renderListWithTemplate(pokemonListCardTemplate, pokemonListElement, this.pokeList);
 
-    // Listen for click on the vote button:
-   
+    // Listen for click on button:
+    document.querySelectorAll("button").forEach(occurence => {
+        let id = occurence.getAttribute("id");
+        let name = occurence.getAttribute("value");
 
-    // let buttons = document.getElementsByTagName("button");
-    // let buttonsCount = buttons.length;
-    // for (let i = 0; i <= buttonsCount; i += 1) {
-    //     buttons[i].onclick = () => {
-    //         if (getLocalStorage("votes").includes(this.value)) {
-    //             let pokeId = buttons[i].getAttribute("id");
-    //             let pokeName = buttons[i].getAttribute("value");
+        occurence.addEventListener("click", function() {
+            let voteList = getLocalStorage("votes");
+            console.log(name)
+            for (const pokemon in voteList) {
+                if (pokemon == name) {
+                    if (voteList[pokemon] > 0) {
+                        voteList[pokemon] += 1;
+                    } else {
+                        voteList[pokemon] = 1;
+                    }
+                } else {
+                    Object.assign(voteList, {[name] : 1});
+                }
+                // console.log(`${pokemon}: ${voteList[pokemon]}`);
+            }
+            
 
-    //             console.log("it's included!")
-    //         } else {
-    //             console.log("it's not included :(")
-    //         }
-                
-    //     };
-    // }
-
-
+            setLocalStorage("votes", voteList);
+            
+            // name: John Doe
+            
+        } );
+      });
     }
 
     // Sorts the pokeList alphabetically:
@@ -101,11 +109,3 @@ export default class PokemonList {
 <p class="poke-color">${pokemon}</p>
 <p class="poke-type">${pokemon}</p>
 <p class="poke-growth">${pokemon}</p> */
-
-/*
-addProductToCart() {
-    let cart = getLocalStorage("so-cart") || [];
-    cart.push(this.product);
-    setLocalStorage("so-cart", cart);
-}
-      */
