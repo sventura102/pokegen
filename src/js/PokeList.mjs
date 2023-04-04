@@ -78,7 +78,6 @@ export default class PokemonList {
                 } else {
                     Object.assign(voteList, {[name] : 1});
                 }
-                // console.log(`${pokemon}: ${voteList[pokemon]}`);
             }
             
 
