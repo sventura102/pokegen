@@ -566,7 +566,10 @@ var _homePageMjs = require("./HomePage.mjs");
 var _homePageMjsDefault = parcelHelpers.interopDefault(_homePageMjs);
 var _pokeListMjs = require("./PokeList.mjs");
 var _pokeListMjsDefault = parcelHelpers.interopDefault(_pokeListMjs);
-//import PokemonVotingPoll from "./poll-process.mjs";
+var _pollProcessMjs = require("./poll-process.mjs");
+var _pollProcessMjsDefault = parcelHelpers.interopDefault(_pollProcessMjs);
+var _signUpMjs = require("./SignUp.mjs");
+var _signUpMjsDefault = parcelHelpers.interopDefault(_signUpMjs);
 const mainContainer = document.querySelector(".main-content");
 const dataSource = new (0, _externalServicesMjsDefault.default)();
 initRouter(dataSource, mainContainer);
@@ -585,11 +588,17 @@ function initRouter(dataSource, mainContainer) {
                 const pokeList = new (0, _pokeListMjsDefault.default)(dataSource, mainContainer);
                 pokeList.init();
                 break;
-            case "#/":
+            case "#/poke-poll":
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
-                const pokePoll = new PokemonVotingPoll(dataSource, mainContainer);
+                const pokePoll = new (0, _pollProcessMjsDefault.default)(dataSource, mainContainer);
                 pokePoll.init();
+                break;
+            case "#/poke-signup":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                const signup = new (0, _signUpMjsDefault.default)(dataSource, mainContainer);
+                signup.init();
                 break;
             default:
                 // Delete previous main content:
@@ -606,7 +615,7 @@ function initRouter(dataSource, mainContainer) {
     });
 }
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
+},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./poll-process.mjs":"bmPuY","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const baseURL = "https://pokeapi.co/api/v2/";
@@ -722,12 +731,6 @@ class HomePage {
         this.mainContainer = mainContainer;
     }
     async init() {
-        (0, _utilsMjs.setLocalStorage)("votes", {
-            "victini": 23,
-            "pikachu": 29,
-            "bulbasaur": 5,
-            "charmeleon": 2
-        });
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | Pok\xe9Gen";
         // Add footer year:
@@ -907,6 +910,153 @@ class PokemonList {
 <p class="poke-type">${pokemon}</p>
 <p class="poke-growth">${pokemon}</p> */ 
 exports.default = PokemonList;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bmPuY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+function pollTemplate() {
+    return `<div class="poll">
+                <div class="top-pokemons"></div>
+            </div>;`;
+}
+//display poll question and options
+let poll = {
+    question: "What's your favorite starter pokemon from the 1st generation?",
+    answers: [
+        "Bulbasaur",
+        "Charmander",
+        "Squirtle",
+        "Pikachu"
+    ],
+    pollCount: 20,
+    answersWeight: [
+        4,
+        4,
+        2,
+        10
+    ],
+    selectedAnswer: 1
+};
+let pollDom = {
+    question: document.querySelector(".poll . question"),
+    answers: document.querySelector(".poll .answers")
+};
+pollDom.question.innerText = poll.question;
+poll.answers.map(function(answer, i) {
+    return `<div class="answer" onClick="markAnswer('${i}')">
+        ${answer}
+        <span class="percentage-bar"></span>
+        <span class="percentage-value"></span>
+        </div`;
+}).join("");
+//mark selected answer
+function markAnswer(i) {
+    poll.selectedAnswer = +i;
+    try {
+        document.querySelector(".poll . answers .answer .selected").classList.remove("selected");
+    } catch (msg) {}
+    document.querySelectorAll(".poll . answers .answer").classList.add("selected");
+    showResults();
+}
+//display poll results
+function showResults() {
+    let answers = document.querySelector(".poll .answers .answer");
+    for(let i = 0; 1 < answers.length; i++){
+        let percentage = 0;
+        if (i == poll.selectedAnswer) percentage = Math.round((poll.answersWeight[i] + 1) * 100 / (poll.pollCount + 1));
+        else percentage = Math.round((poll.answersWeight[i] + 1) * 100 / (poll.pollCount + 1));
+        answers[i].querySelector(".percentage-bar").style.width = percentage + "%";
+        answers[i].querySelector(".percentage-value").innerText = percentage + "%";
+    }
+}
+//Comment Section
+function addComment() {
+    return `<div class ="comments">
+            <h2>Leave Your Comments</h2>
+            <form id=comment-form>
+                <label for="fullName">Name:</label>
+                <input type="fullName" name="fullName" id="fullName" required>
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" required>
+                <textarea placeholder='Add Your Comment'></textarea>
+                <div class="button">
+                    input type="submit" value="Comment">
+                    <button>Cancel</button>
+                </div>
+            </form>
+            </div>`;
+}
+// Store votes:
+setLocalStorage("votes", {
+    "victini": 3,
+    "meowth": 5,
+    "bulbasaur": 2,
+    "pikachu": 15
+});
+// 
+function showResults() {
+    const pokeVotes = getLocalStorage(this.key);
+    if (pokeVotes != null) {
+        let topPokemons = [];
+        // Go through the list of pokemons with votes and 
+        // get the top 4 with most votes:
+        const htmlItems = pokeVotes.map((pokemon)=>{});
+    }
+}
+class PokemonVotingPoll {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+    async init() {
+        // Fill the title with the name of the page:
+        document.querySelector(".page-title").textContent = "Poll Page | Pok\xe9Gen";
+        // Await promise from dataSource:
+        //Render Poll Page main:
+        (0, _utilsMjs.renderWithTemplate)(pollTemplate(), this.mainContainer);
+    // Get the options parent elements:
+    // Listen for click on the button:
+    }
+}
+exports.default = PokemonVotingPoll;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9VahQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+function signupPageTemplate() {
+    return `<h1>Signup</h1>
+            <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
+            <form action="" method="post">
+                <input type="text" name="user-name" placeholder=User Name">
+                <input type="email" name="user-email" placeholder="Email">
+                <input type="password" name="user-pass" placeholder="Password">
+                <input type="button" name="signup-btn" value="Signup" onclick="togglePopup()>
+                </form>
+            <div class="popup" id="popUp">
+                <h2>Thank you!</h2>
+                <p>You've created your account. Thanks!</p>
+            </div>`;
+}
+let signupBtn = document.getElementById("signup-btn");
+function togglePopup() {
+    document.getElementById("popUp").classList.toggle("active");
+}
+class SignUp {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+    async init() {
+        //Fill title with the name of the page:
+        document.querySelector(".page-title").textContent = "Sign Up | Pok\xe9Gen";
+        //Render SignUp main:
+        (0, _utilsMjs.renderWithTemplate)(signupPageTemplate(), this.mainContainer);
+    //Click function:
+    }
+}
+exports.default = SignUp;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
 
