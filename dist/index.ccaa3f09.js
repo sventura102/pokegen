@@ -899,13 +899,7 @@ class PokemonList {
 } /* const pokeInfo = await this.dataSource.findPokemonById(pokeId); */  /* <img src="${pokemon.sprites}" alt="Image of ${pokemon.name}">"/>
 <p class="poke-color">${pokemon}</p>
 <p class="poke-type">${pokemon}</p>
-<p class="poke-growth">${pokemon}</p> */  /*
-addProductToCart() {
-    let cart = getLocalStorage("so-cart") || [];
-    cart.push(this.product);
-    setLocalStorage("so-cart", cart);
-}
-      */ 
+<p class="poke-growth">${pokemon}</p> */ 
 exports.default = PokemonList;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
