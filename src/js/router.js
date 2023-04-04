@@ -1,7 +1,8 @@
 import ExternalServices from "./ExternalServices.mjs";
 import HomePage from "./HomePage.mjs";
 import PokemonList from "./PokeList.mjs";
-//import PokemonVotingPoll from "./poll-process.mjs";
+import PokemonVotingPoll from "./poll-process.mjs";
+import SignUp from "./SignUp.mjs";
 
 
 const mainContainer = document.querySelector(".main-content");
@@ -28,11 +29,18 @@ export function initRouter(dataSource, mainContainer) {
 
                 break;
 
-            case "#/":
+            case "#/poke-poll":
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
                 const pokePoll = new PokemonVotingPoll(dataSource, mainContainer);
                 pokePoll.init();
+                break;
+
+                case "#/poke-signup":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                const signup = new SignUp(dataSource, mainContainer);
+                signup.init();
                 break;
 
             default:
