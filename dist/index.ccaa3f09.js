@@ -1103,7 +1103,7 @@ var _utilsMjs = require("./utils.mjs");
 function signupPageTemplate() {
     return `<h1>Signup</h1>
             <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
-            <form action="" method="post">
+            <form action="" id="signUp-form" method="post">
                 <input type="text" name="user-name" placeholder=User Name">
                 <input type="email" name="user-email" placeholder="Email">
                 <input type="password" name="user-pass" placeholder="Password">
