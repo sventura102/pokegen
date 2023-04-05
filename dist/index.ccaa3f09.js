@@ -868,7 +868,6 @@ class PokemonList {
         // //Get pokemon info from API:
         // this.getPokeInfo(pokeId);s
         });
-        console.log(this.pokeList);
         // Get the options parent elements:
         const pokemonListElement = document.querySelector("#pokemon-list");
         // Render list of generations:
@@ -877,7 +876,7 @@ class PokemonList {
         document.querySelectorAll("button").forEach((occurence)=>{
             let name = occurence.getAttribute("id");
             occurence.addEventListener("click", function() {
-                let voteList = (0, _utilsMjs.getLocalStorage)("votes");
+                let voteList = (0, _utilsMjs.getLocalStorage)("votes") || {};
                 // Check pokemons inside the votes object:
                 for(const pokemon in voteList)if (pokemon == name) {
                     if (voteList[pokemon] > 0) voteList[pokemon] += 1;
@@ -903,7 +902,7 @@ class PokemonList {
     }
     // Get pokémon information:
     async getPokeInfo(pokeId) {
-        this.pokeInfo.push(await this.dataSource.findPokemonById(pokeId));
+        this.pokeInfo = await this.dataSource.findPokemonById(pokeId);
     }
 } /* const pokeInfo = await this.dataSource.findPokemonById(pokeId); */  /* <img src="${pokemon.sprites}" alt="Image of ${pokemon.name}">"/>
 <p class="poke-color">${pokemon}</p>
