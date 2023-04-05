@@ -890,7 +890,7 @@ class PokemonList {
         (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, pokemonListElement, this.pokeList);
         // Listen for click on button:
         document.querySelectorAll("button").forEach((occurence)=>{
-            let name = occurence.getAttribute("id");
+            const name = occurence.getAttribute("id");
             occurence.addEventListener("click", function() {
                 let voteList = (0, _utilsMjs.getLocalStorage)("votes");
                 // Check pokemons inside the votes object:

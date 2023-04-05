@@ -61,7 +61,7 @@ export default class PokemonList {
 
     // Listen for click on button:
     document.querySelectorAll("button").forEach(occurence => {
-        let name = occurence.getAttribute("id");
+        const name = occurence.getAttribute("id");
 
         occurence.addEventListener("click", function() {
             let voteList = getLocalStorage("votes");
