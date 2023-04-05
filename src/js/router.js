@@ -1,7 +1,8 @@
 import ExternalServices from "./ExternalServices.mjs";
 import HomePage from "./HomePage.mjs";
 import PokemonList from "./PokeList.mjs";
-import PokemonVotingPoll from "./poll-process.mjs";
+import PokemonDetails from "./PokeDetails.mjs";
+//import PokemonVotingPoll from "./poll-process.mjs";
 import SignUp from "./SignUp.mjs";
 
 
@@ -27,6 +28,13 @@ export function initRouter(dataSource, mainContainer) {
                 const pokeList = new PokemonList(dataSource, mainContainer);
                 pokeList.init();
 
+                break;
+            
+            case "#/poke-details":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                const pokeDetails = new PokemonDetails(dataSource, mainContainer);
+                pokeDetails.init();
                 break;
 
             case "#/poke-poll":

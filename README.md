@@ -18,5 +18,3 @@ Final project for WDD 330 - Web Frontend Development II. The PokeGen site will d
 ## Other commands
 
 - `npm run build` to build final files when you are ready to turn in.
-- `npm run lint` to run ESLint against your code to find errors.
-- `npm run format` to run Prettier to automatically format your code.
