@@ -1,4 +1,5 @@
 import { renderWithTemplate } from "./utils.mjs";
+import { successPageTemplate } from "./Success.mjs"
 function signupPageTemplate() {
     return `<h1>Signup</h1>
             <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
@@ -7,11 +8,7 @@ function signupPageTemplate() {
                 <input type="email" name="user-email" placeholder="Email">
                 <input type="password" name="user-pass" placeholder="Password">
                 <input type="button" name="signup-btn" value="Signup">
-                </form>
-            <div class="popup" id="popUp">
-                <h2>Thank you!</h2>
-                <p>You've created your account. Thanks!</p>
-            </div>`
+                </form>`
 }
 
 function togglePopup() {
@@ -32,7 +29,7 @@ async init() {
 
     //Click function:
     document.querySelector("#signup-btn").addEventListener("click", () => {
-        return togglePopup;
+        return successPageTemplate;
     })
 
     }
