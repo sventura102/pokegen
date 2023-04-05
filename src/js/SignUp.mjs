@@ -11,10 +11,6 @@ function signupPageTemplate() {
                 </form>`
 }
 
-function togglePopup() {
-    document.getElementById("popUp").classList.toggle("active");
-}
-
 export default class SignUp {
     constructor(dataSource, mainContainer) {
         this.dataSource = dataSource;
@@ -28,9 +24,8 @@ async init() {
     renderWithTemplate(signupPageTemplate(), this.mainContainer);
 
     //Click function:
-    document.querySelector("#signup-btn").addEventListener("click", () => {
-        return successPageTemplate;
-    })
-
+    document.getElementById("#signup-btn").onclick = function successPageTemplate() {
+        location.href = successPageTemplate;
+        }
     }
 }

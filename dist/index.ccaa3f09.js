@@ -572,6 +572,8 @@ var _pollProcessMjs = require("./poll-process.mjs");
 var _pollProcessMjsDefault = parcelHelpers.interopDefault(_pollProcessMjs);
 var _signUpMjs = require("./SignUp.mjs");
 var _signUpMjsDefault = parcelHelpers.interopDefault(_signUpMjs);
+var _successMjs = require("./Success.mjs");
+var _successMjsDefault = parcelHelpers.interopDefault(_successMjs);
 const mainContainer = document.querySelector(".main-content");
 const dataSource = new (0, _externalServicesMjsDefault.default)();
 initRouter(dataSource, mainContainer);
@@ -608,6 +610,12 @@ function initRouter(dataSource, mainContainer) {
                 const signup = new (0, _signUpMjsDefault.default)(dataSource, mainContainer);
                 signup.init();
                 break;
+            case "#/success":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                const success = new (0, _successMjsDefault.default)(dataSource, mainContainer);
+                success.init();
+                break;
             default:
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
@@ -623,7 +631,7 @@ function initRouter(dataSource, mainContainer) {
     });
 }
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./PokeDetails.mjs":"68RwI","./poll-process.mjs":"bmPuY","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
+},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./PokeDetails.mjs":"68RwI","./poll-process.mjs":"bmPuY","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Success.mjs":"e04rr"}],"b2hnZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const baseURL = "https://pokeapi.co/api/v2/";
@@ -1103,6 +1111,7 @@ exports.default = PokemonVotingPoll;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsMjs = require("./utils.mjs");
+var _successMjs = require("./Success.mjs");
 function signupPageTemplate() {
     return `<h1>Signup</h1>
             <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
@@ -1111,14 +1120,7 @@ function signupPageTemplate() {
                 <input type="email" name="user-email" placeholder="Email">
                 <input type="password" name="user-pass" placeholder="Password">
                 <input type="button" name="signup-btn" value="Signup">
-                </form>
-            <div class="popup" id="popUp">
-                <h2>Thank you!</h2>
-                <p>You've created your account. Thanks!</p>
-            </div>`;
-}
-function togglePopup() {
-    document.getElementById("popUp").classList.toggle("active");
+                </form>`;
 }
 class SignUp {
     constructor(dataSource, mainContainer){
@@ -1131,12 +1133,37 @@ class SignUp {
         //Render SignUp main:
         (0, _utilsMjs.renderWithTemplate)(signupPageTemplate(), this.mainContainer);
         //Click function:
-        document.querySelector("#signup-btn").addEventListener("click", ()=>{
-            return togglePopup;
-        });
+        document.getElementById("#signup-btn").onclick = function successPageTemplate() {
+            location.href = successPageTemplate;
+        };
     }
 }
 exports.default = SignUp;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Success.mjs":"e04rr"}],"e04rr":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+function successPageTemplate() {
+    return `<div class="success" id="success">
+        <h1>Thank you!</h1>
+        <h2>You've created your account. Thanks!</h2>
+        <p>You've been signed up to receive updates on new Pokémon as new games are released!</p> 
+</div>`;
+}
+class Success {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+    async init() {
+        //Fill title with the name of the page:
+        document.querySelector(".page-title").textContent = "Thank you! | Pok\xe9Gen";
+        //Render Success main:
+        (0, _utilsMjs.renderWithTemplate)(successPageTemplate(), this.mainContainer);
+    }
+}
+exports.default = Success;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
 

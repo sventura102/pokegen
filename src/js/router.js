@@ -4,6 +4,7 @@ import PokemonList from "./PokeList.mjs";
 import PokemonDetails from "./PokeDetails.mjs";
 import PokemonVotingPoll from "./poll-process.mjs";
 import SignUp from "./SignUp.mjs";
+import Success from "./Success.mjs";
 
 
 const mainContainer = document.querySelector(".main-content");
@@ -51,6 +52,12 @@ export function initRouter(dataSource, mainContainer) {
                 signup.init();
                 break;
 
+            case "#/success":
+                    // Delete previous main content:
+                    mainContainer.innerHtml = "";
+                    const success = new Success(dataSource, mainContainer);
+                    success.init();
+                    break;
             default:
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
