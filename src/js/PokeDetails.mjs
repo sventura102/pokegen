@@ -39,7 +39,7 @@ export default class PokemonDetails {
         let name = document.querySelector("#poke-vote").getAttribute("value");
 
         // Get votes from localStorage:
-        let voteList = getLocalStorage("votes") || {[name] : 1};
+        let voteList = getLocalStorage("votes");
 
         // Check pokemons inside the votes object:
             for (const pokemon in voteList) {

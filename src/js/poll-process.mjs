@@ -27,16 +27,16 @@ function pollTemplate() {
 
 function showResults(topPokemon) {
     return `<li>
-                ${topPokemon.pokemon1[0]}-${topPokemon.pokemon1[1]}
+                Awarded <strong>1st</strong> place: ${topPokemon.pokemon1[0]}! With <span class="num-votes">${topPokemon.pokemon1[1]}</span> votes!
             </li>
             <li>
-                ${topPokemon.pokemon2[0]}-${topPokemon.pokemon2[1]}
+                Awarded <strong>2nd</strong> place: ${topPokemon.pokemon2[0]}! With <span class="num-votes">${topPokemon.pokemon2[1]}</span> votes!
             </li>
             <li>
-                ${topPokemon.pokemon3[0]}-${topPokemon.pokemon3[1]}
+                Awarded <strong>3rd</strong> place: ${topPokemon.pokemon3[0]}! With <span class="num-votes">${topPokemon.pokemon3[1]}</span> votes!
             </li>
             <li>
-                ${topPokemon.pokemon4[0]}-${topPokemon.pokemon4[1]}
+                Awarded <strong>4th</strong> place: ${topPokemon.pokemon4[0]}! With <span class="num-votes">${topPokemon.pokemon4[1]}</span> votes!
             </li>`
 };
 
@@ -44,7 +44,6 @@ export default class PokemonVotingPoll {
     constructor(dataSource, mainContainer) {
         this.dataSource = dataSource;
         this.mainContainer = mainContainer;
-        this.listElement = document.querySelector(".topPokemon");
     }
 
     async init() {
@@ -90,9 +89,9 @@ export default class PokemonVotingPoll {
 
         Object.assign(topPokemon,{pokemon1:[[pokemon1],[maxVote]], pokemon2:[[pokemon2], [maxVote2]], pokemon3:[[pokemon3],[maxVote3]], pokemon4:[[pokemon4],[maxVote4]]})
 
-        console.log(topPokemon);
+        const listElement = document.querySelector(".topPokemon");
 
         //Render Votes:
-        renderWithTemplate(showResults(topPokemon), this.listElement);
+        renderWithTemplate(showResults(topPokemon), listElement);
         }
     }

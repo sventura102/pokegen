@@ -739,13 +739,13 @@ class HomePage {
         this.mainContainer = mainContainer;
     }
     async init() {
-        //localStorage for Poll Votes
-        (0, _utilsMjs.setLocalStorage)("votes", {
-            "pikachu": 15,
-            "meowth": 5,
-            "victini": 55,
+        // Set localStorage with base votes:
+        if (!(0, _utilsMjs.getLocalStorage)("votes")) (0, _utilsMjs.setLocalStorage)("votes", {
+            "pikachu": 10,
+            "meowth": 3,
+            "victini": 5,
             "bulbasaur": 2,
-            "ekans": 3
+            "ekans": 1
         });
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | Pok\xe9Gen";
@@ -890,9 +890,9 @@ class PokemonList {
         (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, pokemonListElement, this.pokeList);
         // Listen for click on button:
         document.querySelectorAll("button").forEach((occurence)=>{
-            let name = occurence.getAttribute("id");
+            const name = occurence.getAttribute("id");
             occurence.addEventListener("click", function() {
-                let voteList = (0, _utilsMjs.getLocalStorage)("votes") || {};
+                let voteList = (0, _utilsMjs.getLocalStorage)("votes");
                 // Check pokemons inside the votes object:
                 for(const pokemon in voteList)if (pokemon == name) {
                     if (voteList[pokemon] > 0) voteList[pokemon] += 1;
@@ -961,9 +961,7 @@ class PokemonDetails {
         document.querySelector("#poke-vote").addEventListener("click", ()=>{
             let name = document.querySelector("#poke-vote").getAttribute("value");
             // Get votes from localStorage:
-            let voteList = (0, _utilsMjs.getLocalStorage)("votes") || {
-                [name]: 1
-            };
+            let voteList = (0, _utilsMjs.getLocalStorage)("votes");
             // Check pokemons inside the votes object:
             for(const pokemon in voteList)if (pokemon == name) {
                 if (voteList[pokemon] > 0) voteList[pokemon] += 1;
@@ -1008,23 +1006,22 @@ function pollTemplate() {
 }
 function showResults(topPokemon) {
     return `<li>
-                ${topPokemon.pokemon1[0]}-${topPokemon.pokemon1[1]}
+                Awarded <strong>1st</strong> place: ${topPokemon.pokemon1[0]}! With <span class="num-votes">${topPokemon.pokemon1[1]}</span> votes!
             </li>
             <li>
-                ${topPokemon.pokemon2[0]}-${topPokemon.pokemon2[1]}
+                Awarded <strong>2nd</strong> place: ${topPokemon.pokemon2[0]}! With <span class="num-votes">${topPokemon.pokemon2[1]}</span> votes!
             </li>
             <li>
-                ${topPokemon.pokemon3[0]}-${topPokemon.pokemon3[1]}
+                Awarded <strong>3rd</strong> place: ${topPokemon.pokemon3[0]}! With <span class="num-votes">${topPokemon.pokemon3[1]}</span> votes!
             </li>
             <li>
-                ${topPokemon.pokemon4[0]}-${topPokemon.pokemon4[1]}
+                Awarded <strong>4th</strong> place: ${topPokemon.pokemon4[0]}! With <span class="num-votes">${topPokemon.pokemon4[1]}</span> votes!
             </li>`;
 }
 class PokemonVotingPoll {
     constructor(dataSource, mainContainer){
         this.dataSource = dataSource;
         this.mainContainer = mainContainer;
-        this.listElement = document.querySelector(".topPokemon");
     }
     async init() {
         // Fill the title with the name of the page:
@@ -1092,9 +1089,9 @@ class PokemonVotingPoll {
                 ]
             ]
         });
-        console.log(topPokemon);
+        const listElement = document.querySelector(".topPokemon");
         //Render Votes:
-        (0, _utilsMjs.renderWithTemplate)(showResults(topPokemon), this.listElement);
+        (0, _utilsMjs.renderWithTemplate)(showResults(topPokemon), listElement);
     }
 }
 exports.default = PokemonVotingPoll;

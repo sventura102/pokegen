@@ -1,4 +1,4 @@
-import {renderListWithTemplate, renderWithTemplate, setLocalStorage} from "./utils.mjs";
+import {getLocalStorage, renderListWithTemplate, renderWithTemplate, setLocalStorage} from "./utils.mjs";
 
 function homePageTemplate() {
     return `<h1>Welcome to the Pokémon Generator!</h1>
@@ -43,14 +43,15 @@ export default class HomePage {
     }
 
     async init () {
-        //localStorage for Poll Votes
-        setLocalStorage("votes", {
-            "pikachu" : 15,
-            "meowth" : 5,
-            "victini" : 55,            
+        // Set localStorage with base votes:
+        if (!getLocalStorage("votes")) {
+            setLocalStorage("votes", {
+            "pikachu" : 10,
+            "meowth" : 3,
+            "victini" : 5,
             "bulbasaur" : 2,
-            "ekans" : 3
-        })
+            "ekans" : 1
+        })}
 
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | PokéGen";
