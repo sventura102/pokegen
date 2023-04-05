@@ -1,0 +1,48 @@
+/* Poll Process Styling*/
+
+/*Sign Up Styling */
+.signUp-form input {
+    min-width: 400px;
+    display: block;
+    margin: 20px;
+    padding: 15px 20px;
+    background-color: #000;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    box-shadow: 15px 15px 25px #a8a8a8;
+    transform: box-shadow 0.5s;
+}
+
+.signUp-form input:focus {
+    box-shadow: 5px 5px 15px #a8a8a8;
+}
+
+.signUp-form [name="signup-btn"] {
+    margin: auto;
+    padding: 10px 35px;
+    background-color: #a8a8a8;
+    color: #fff;
+    border: none;
+    font-size: 22px;
+    border-radius: 10px;
+    box-align: 15px 15px 20px #a8a8a8;
+    transform: box-shadow 0.5s;
+    outline: none;
+}
+
+.signUp-form [name="signup-btn"]:hover {
+    box-shadow: 5px 5px 15px #aaa;
+}
+
+.signUp-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    bottom: 0px;
+    font-size: 35px;
+}
