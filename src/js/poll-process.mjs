@@ -25,9 +25,18 @@ function pollTemplate() {
             `;
 }
 
-function showResults () {
+function showResults(topPokemon) {
     return `<li>
-                ${topPokemon}
+                ${topPokemon.pokemon1[0]}-${topPokemon.pokemon1[1]}
+            </li>
+            <li>
+                ${topPokemon.pokemon2[0]}-${topPokemon.pokemon2[1]}
+            </li>
+            <li>
+                ${topPokemon.pokemon3[0]}-${topPokemon.pokemon3[1]}
+            </li>
+            <li>
+                ${topPokemon.pokemon4[0]}-${topPokemon.pokemon4[1]}
             </li>`
 };
 
@@ -35,6 +44,7 @@ export default class PokemonVotingPoll {
     constructor(dataSource, mainContainer) {
         this.dataSource = dataSource;
         this.mainContainer = mainContainer;
+        this.listElement = document.querySelector(".topPokemon");
     }
 
     async init() {
@@ -81,5 +91,8 @@ export default class PokemonVotingPoll {
         Object.assign(topPokemon,{pokemon1:[[pokemon1],[maxVote]], pokemon2:[[pokemon2], [maxVote2]], pokemon3:[[pokemon3],[maxVote3]], pokemon4:[[pokemon4],[maxVote4]]})
 
         console.log(topPokemon);
+
+        //Render Votes:
+        renderWithTemplate(showResults(topPokemon), this.listElement);
         }
     }

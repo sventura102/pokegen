@@ -1006,15 +1006,25 @@ function pollTemplate() {
             </div>
             `;
 }
-function showResults() {
+function showResults(topPokemon) {
     return `<li>
-                ${topPokemon}
+                ${topPokemon.pokemon1[0]}-${topPokemon.pokemon1[1]}
+            </li>
+            <li>
+                ${topPokemon.pokemon2[0]}-${topPokemon.pokemon2[1]}
+            </li>
+            <li>
+                ${topPokemon.pokemon3[0]}-${topPokemon.pokemon3[1]}
+            </li>
+            <li>
+                ${topPokemon.pokemon4[0]}-${topPokemon.pokemon4[1]}
             </li>`;
 }
 class PokemonVotingPoll {
     constructor(dataSource, mainContainer){
         this.dataSource = dataSource;
         this.mainContainer = mainContainer;
+        this.listElement = document.querySelector(".topPokemon");
     }
     async init() {
         // Fill the title with the name of the page:
@@ -1032,7 +1042,7 @@ class PokemonVotingPoll {
         let pokemon3 = "";
         let pokemon4 = "";
         // Compare votes to find the pokemon with the most votes:
-        let topPokemon1 = {};
+        let topPokemon = {};
         for(let pokemon in voteList){
             if (voteList[pokemon] > maxVote) {
                 maxVote = voteList[pokemon];
@@ -1048,7 +1058,7 @@ class PokemonVotingPoll {
                 pokemon4 = pokemon;
             }
         }
-        Object.assign(topPokemon1, {
+        Object.assign(topPokemon, {
             pokemon1: [
                 [
                     pokemon1
@@ -1082,7 +1092,9 @@ class PokemonVotingPoll {
                 ]
             ]
         });
-        console.log(topPokemon1);
+        console.log(topPokemon);
+        //Render Votes:
+        (0, _utilsMjs.renderWithTemplate)(showResults(topPokemon), this.listElement);
     }
 }
 exports.default = PokemonVotingPoll;
