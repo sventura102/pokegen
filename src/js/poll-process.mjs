@@ -112,11 +112,13 @@ export default class PokemonVotingPoll {
         // Await promise from dataSource:
 
         //Render Poll Page main:
-        renderWithTemplate(pollTemplate(), this.mainContainer);
+        renderWithTemplate(pollTemplate(), addComment(), this.mainContainer);
 
         // Get the options parent elements:
-
+        
         // Listen for click on the button:
+
+        //Display 
 
     }
 }
