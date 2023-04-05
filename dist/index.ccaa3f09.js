@@ -1006,16 +1006,16 @@ function pollTemplate() {
 }
 function showResults(topPokemon) {
     return `<li>
-                Awarded <strong>1st</strong> place: ${topPokemon.pokemon1[0]}! With <span class="num-votes">${topPokemon.pokemon1[1]}</span> votes!
+                Awarded <span class="poll-results">1st</span> place: <span class="poll-results">${topPokemon.pokemon1[0]}</span>! With <span class="poll-results">${topPokemon.pokemon1[1]}</span> votes!
             </li>
             <li>
-                Awarded <strong>2nd</strong> place: ${topPokemon.pokemon2[0]}! With <span class="num-votes">${topPokemon.pokemon2[1]}</span> votes!
+                Awarded <span class="poll-results">2nd</span> place: <span class="poll-results">${topPokemon.pokemon2[0]}</span>! With <span class="poll-results">${topPokemon.pokemon2[1]}</span> votes!
             </li>
             <li>
-                Awarded <strong>3rd</strong> place: ${topPokemon.pokemon3[0]}! With <span class="num-votes">${topPokemon.pokemon3[1]}</span> votes!
+                Awarded <span class="poll-results">3rd</span> place: <span class="poll-results">${topPokemon.pokemon3[0]}</span>! With <span class="poll-results">${topPokemon.pokemon3[1]}</span> votes!
             </li>
             <li>
-                Awarded <strong>4th</strong> place: ${topPokemon.pokemon4[0]}! With <span class="num-votes">${topPokemon.pokemon4[1]}</span> votes!
+                Awarded <span class="poll-results">4th</span> place: <span class="poll-results">${topPokemon.pokemon4[0]}</span>! With <span class="poll-results">${topPokemon.pokemon4[1]}</span> votes!
             </li>`;
 }
 class PokemonVotingPoll {
