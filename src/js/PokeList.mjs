@@ -64,7 +64,8 @@ export default class PokemonList {
         let name = occurence.getAttribute("id");
 
         occurence.addEventListener("click", function() {
-            let voteList = getLocalStorage("votes") || {};
+            let voteList = getLocalStorage("votes");
+
             // Check pokemons inside the votes object:
             for (const pokemon in voteList) {
                 if (pokemon == name) {
