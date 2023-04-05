@@ -105,3 +105,4 @@ dist
 
 # Parcel cache
 .parcel-cache/
+.parcel-cache/data.mdb
