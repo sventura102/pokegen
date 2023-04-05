@@ -6,15 +6,13 @@ function signupPageTemplate() {
                 <input type="text" name="user-name" placeholder=User Name">
                 <input type="email" name="user-email" placeholder="Email">
                 <input type="password" name="user-pass" placeholder="Password">
-                <input type="button" name="signup-btn" value="Signup" onclick="togglePopup()>
+                <input type="button" name="signup-btn" value="Signup">
                 </form>
             <div class="popup" id="popUp">
                 <h2>Thank you!</h2>
                 <p>You've created your account. Thanks!</p>
             </div>`
 }
-
-let signupBtn = document.getElementById("signup-btn");
 
 function togglePopup() {
     document.getElementById("popUp").classList.toggle("active");
@@ -33,7 +31,9 @@ async init() {
     renderWithTemplate(signupPageTemplate(), this.mainContainer);
 
     //Click function:
-    
+    document.querySelector("#signup-btn").addEventListener("click", () => {
+        return togglePopup;
+    })
 
     }
 }
