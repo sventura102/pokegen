@@ -566,7 +566,10 @@ var _homePageMjs = require("./HomePage.mjs");
 var _homePageMjsDefault = parcelHelpers.interopDefault(_homePageMjs);
 var _pokeListMjs = require("./PokeList.mjs");
 var _pokeListMjsDefault = parcelHelpers.interopDefault(_pokeListMjs);
-//import PokemonVotingPoll from "./poll-process.mjs";
+var _pokeDetailsMjs = require("./PokeDetails.mjs");
+var _pokeDetailsMjsDefault = parcelHelpers.interopDefault(_pokeDetailsMjs);
+var _pollProcessMjs = require("./poll-process.mjs");
+var _pollProcessMjsDefault = parcelHelpers.interopDefault(_pollProcessMjs);
 var _signUpMjs = require("./SignUp.mjs");
 var _signUpMjsDefault = parcelHelpers.interopDefault(_signUpMjs);
 const mainContainer = document.querySelector(".main-content");
@@ -586,6 +589,12 @@ function initRouter(dataSource, mainContainer) {
                 mainContainer.innerHtml = "";
                 const pokeList = new (0, _pokeListMjsDefault.default)(dataSource, mainContainer);
                 pokeList.init();
+                break;
+            case "#/poke-details":
+                // Delete previous main content:
+                mainContainer.innerHtml = "";
+                const pokeDetails = new (0, _pokeDetailsMjsDefault.default)(dataSource, mainContainer);
+                pokeDetails.init();
                 break;
             case "#/poke-poll":
                 // Delete previous main content:
@@ -614,7 +623,7 @@ function initRouter(dataSource, mainContainer) {
     });
 }
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
+},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./poll-process.mjs":"bmPuY","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./PokeDetails.mjs":"68RwI"}],"b2hnZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const baseURL = "https://pokeapi.co/api/v2/";
@@ -867,7 +876,6 @@ class PokemonList {
         // //Get pokemon info from API:
         // this.getPokeInfo(pokeId);s
         });
-        console.log(this.pokeList);
         // Get the options parent elements:
         const pokemonListElement = document.querySelector("#pokemon-list");
         // Render list of generations:
@@ -876,7 +884,7 @@ class PokemonList {
         document.querySelectorAll("button").forEach((occurence)=>{
             let name = occurence.getAttribute("id");
             occurence.addEventListener("click", function() {
-                let voteList = (0, _utilsMjs.getLocalStorage)("votes");
+                let voteList = (0, _utilsMjs.getLocalStorage)("votes") || {};
                 // Check pokemons inside the votes object:
                 for(const pokemon in voteList)if (pokemon == name) {
                     if (voteList[pokemon] > 0) voteList[pokemon] += 1;
@@ -902,7 +910,7 @@ class PokemonList {
     }
     // Get pokémon information:
     async getPokeInfo(pokeId) {
-        this.pokeInfo.push(await this.dataSource.findPokemonById(pokeId));
+        this.pokeInfo = await this.dataSource.findPokemonById(pokeId);
     }
 } /* const pokeInfo = await this.dataSource.findPokemonById(pokeId); */  /* <img src="${pokemon.sprites}" alt="Image of ${pokemon.name}">"/>
 <p class="poke-color">${pokemon}</p>
@@ -948,6 +956,58 @@ class SignUp {
     }
 }
 exports.default = SignUp;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"68RwI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+function pokeDetailsMainTemplate(pokemon) {
+    return `<h1>Welcome to the ${pokemon.name}</h1>
+            <div id="pokemon-card">
+                <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}">
+                <h2>${pokemon.name.toUpperCase()}</h2>
+                <p>Type: ${pokemon.types.map((type)=>type.type.name).join(", ")}</p>    
+                <ul>Abilities:<br><br>
+                    ${pokemon.abilities.map((ability)=>`<li>${ability.ability.name}</li>`).join("")}
+                </ul>
+                <button type="submit" id="poke-vote" value="${pokemon.name}">Vote for Me!</button>
+            </div>`;
+}
+class PokemonDetails {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+        this.pokeInfo = [];
+    }
+    async init() {
+        // Fill the title with the name of the page:
+        document.querySelector(".page-title").textContent = `Pokémon Details | PokéGen`;
+        // Get pokémon ID from localStorage:
+        const pokeId = (0, _utilsMjs.getLocalStorage)("pokeId");
+        // Await promise from dataSource:
+        this.pokeInfo = await this.dataSource.findPokemonById(pokeId);
+        // Render PokeList main:
+        (0, _utilsMjs.renderWithTemplate)(pokeDetailsMainTemplate(this.pokeInfo), this.mainContainer);
+        // Listen for click on the button:
+        document.querySelector("#poke-vote").addEventListener("click", ()=>{
+            let name = document.querySelector("#poke-vote").getAttribute("value");
+            // Get votes from localStorage:
+            let voteList = (0, _utilsMjs.getLocalStorage)("votes") || {
+                [name]: 1
+            };
+            // Check pokemons inside the votes object:
+            for(const pokemon in voteList)if (pokemon == name) {
+                if (voteList[pokemon] > 0) voteList[pokemon] += 1;
+                else voteList[pokemon] = 1;
+            } else Object.assign(voteList, {
+                [name]: 1
+            });
+            // Set new values in localStorage:
+            (0, _utilsMjs.setLocalStorage)("votes", voteList);
+        });
+    }
+}
+exports.default = PokemonDetails;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
 
