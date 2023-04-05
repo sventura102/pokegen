@@ -36,7 +36,7 @@ export function initRouter(dataSource, mainContainer) {
                 pokePoll.init();
                 break;
 
-                case "#/poke-signup":
+            case "#/poke-signup":
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
                 const signup = new SignUp(dataSource, mainContainer);
