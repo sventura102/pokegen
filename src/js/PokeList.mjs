@@ -52,7 +52,6 @@ export default class PokemonList {
         // this.getPokeInfo(pokeId);s
 
     });
-    console.log(this.pokeList);
 
     // Get the options parent elements:
     const pokemonListElement = document.querySelector("#pokemon-list");
@@ -65,7 +64,7 @@ export default class PokemonList {
         let name = occurence.getAttribute("id");
 
         occurence.addEventListener("click", function() {
-            let voteList = getLocalStorage("votes");
+            let voteList = getLocalStorage("votes") || {};
             // Check pokemons inside the votes object:
             for (const pokemon in voteList) {
                 if (pokemon == name) {
@@ -104,7 +103,7 @@ export default class PokemonList {
 
     // Get pokémon information:
     async getPokeInfo(pokeId) {
-        this.pokeInfo.push(await this.dataSource.findPokemonById(pokeId));
+        this.pokeInfo = await this.dataSource.findPokemonById(pokeId);
     }
 
 }
