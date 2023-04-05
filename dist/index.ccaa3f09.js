@@ -568,8 +568,7 @@ var _pokeListMjs = require("./PokeList.mjs");
 var _pokeListMjsDefault = parcelHelpers.interopDefault(_pokeListMjs);
 var _pokeDetailsMjs = require("./PokeDetails.mjs");
 var _pokeDetailsMjsDefault = parcelHelpers.interopDefault(_pokeDetailsMjs);
-var _pollProcessMjs = require("./poll-process.mjs");
-var _pollProcessMjsDefault = parcelHelpers.interopDefault(_pollProcessMjs);
+//import PokemonVotingPoll from "./poll-process.mjs";
 var _signUpMjs = require("./SignUp.mjs");
 var _signUpMjsDefault = parcelHelpers.interopDefault(_signUpMjs);
 const mainContainer = document.querySelector(".main-content");
@@ -623,7 +622,8 @@ function initRouter(dataSource, mainContainer) {
     });
 }
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./PokeDetails.mjs":"68RwI","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./poll-process.mjs":"bmPuY"}],"b2hnZ":[function(require,module,exports) {
+
+},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./PokeDetails.mjs":"68RwI","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const baseURL = "https://pokeapi.co/api/v2/";
@@ -1018,6 +1018,7 @@ class SignUp {
 exports.default = SignUp;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bmPuY":[function(require,module,exports) {
+
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsMjs = require("./utils.mjs");
@@ -1137,6 +1138,45 @@ class PokemonVotingPoll {
     }
 }
 exports.default = PokemonVotingPoll;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9VahQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+function signupPageTemplate() {
+    return `<h1>Signup</h1>
+            <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
+            <form action="" method="post">
+                <input type="text" name="user-name" placeholder=User Name">
+                <input type="email" name="user-email" placeholder="Email">
+                <input type="password" name="user-pass" placeholder="Password">
+                <input type="button" name="signup-btn" value="Signup">
+                </form>
+            <div class="popup" id="popUp">
+                <h2>Thank you!</h2>
+                <p>You've created your account. Thanks!</p>
+            </div>`;
+}
+function togglePopup() {
+    document.getElementById("popUp").classList.toggle("active");
+}
+class SignUp {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+    async init() {
+        //Fill title with the name of the page:
+        document.querySelector(".page-title").textContent = "Sign Up | Pok\xe9Gen";
+        //Render SignUp main:
+        (0, _utilsMjs.renderWithTemplate)(signupPageTemplate(), this.mainContainer);
+        //Click function:
+        document.querySelector("#signup-btn").addEventListener("click", ()=>{
+            return togglePopup;
+        });
+    }
+}
+exports.default = SignUp;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
 
