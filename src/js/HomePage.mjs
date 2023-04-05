@@ -43,6 +43,14 @@ export default class HomePage {
     }
 
     async init () {
+        //localStorage for Poll Votes
+        setLocalStorage("votes", {
+            "pikachu" : 15,
+            "meowth" : 5,
+            "victini" : 55,            
+            "bulbasaur" : 2,
+            "ekans" : 3
+        })
 
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | PokéGen";

@@ -599,7 +599,7 @@ function initRouter(dataSource, mainContainer) {
             case "#/poke-poll":
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
-                const pokePoll = new PokemonVotingPoll(dataSource, mainContainer);
+                const pokePoll = new (0, _pollProcessMjsDefault.default)(dataSource, mainContainer);
                 pokePoll.init();
                 break;
             case "#/poke-signup":
@@ -623,7 +623,7 @@ function initRouter(dataSource, mainContainer) {
     });
 }
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./poll-process.mjs":"bmPuY","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./PokeDetails.mjs":"68RwI"}],"b2hnZ":[function(require,module,exports) {
+},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./PokeDetails.mjs":"68RwI","./poll-process.mjs":"bmPuY","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const baseURL = "https://pokeapi.co/api/v2/";
@@ -739,6 +739,14 @@ class HomePage {
         this.mainContainer = mainContainer;
     }
     async init() {
+        //localStorage for Poll Votes
+        (0, _utilsMjs.setLocalStorage)("votes", {
+            "pikachu": 15,
+            "meowth": 5,
+            "victini": 55,
+            "bulbasaur": 2,
+            "ekans": 3
+        });
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | Pok\xe9Gen";
         // Add footer year:
@@ -918,45 +926,6 @@ class PokemonList {
 <p class="poke-growth">${pokemon}</p> */ 
 exports.default = PokemonList;
 
-},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9VahQ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _utilsMjs = require("./utils.mjs");
-function signupPageTemplate() {
-    return `<h1>Signup</h1>
-            <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
-            <form action="" method="post">
-                <input type="text" name="user-name" placeholder=User Name">
-                <input type="email" name="user-email" placeholder="Email">
-                <input type="password" name="user-pass" placeholder="Password">
-                <input type="button" name="signup-btn" value="Signup">
-                </form>
-            <div class="popup" id="popUp">
-                <h2>Thank you!</h2>
-                <p>You've created your account. Thanks!</p>
-            </div>`;
-}
-function togglePopup() {
-    document.getElementById("popUp").classList.toggle("active");
-}
-class SignUp {
-    constructor(dataSource, mainContainer){
-        this.dataSource = dataSource;
-        this.mainContainer = mainContainer;
-    }
-    async init() {
-        //Fill title with the name of the page:
-        document.querySelector(".page-title").textContent = "Sign Up | Pok\xe9Gen";
-        //Render SignUp main:
-        (0, _utilsMjs.renderWithTemplate)(signupPageTemplate(), this.mainContainer);
-        //Click function:
-        document.querySelector("#signup-btn").addEventListener("click", ()=>{
-            return togglePopup;
-        });
-    }
-}
-exports.default = SignUp;
-
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"68RwI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -1008,6 +977,154 @@ class PokemonDetails {
     }
 }
 exports.default = PokemonDetails;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bmPuY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+//display poll
+function pollTemplate() {
+    return `<h1>Poll Page</h1>
+            <h2>The top 4 pokemons:</h2>
+            <div class="poll">
+                <ul class="topPokemon">
+                </ul>
+            </div>
+            <div class ="comments">
+            <h2>Leave Your Comments</h2>
+            <form id=comment-form>
+                <label for="fullName">Name:</label>
+                <input type="fullName" name="fullName" id="fullName" required>
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" required>
+                <textarea placeholder='Add Your Comment'></textarea>
+                <div class="button">
+                    <input type="submit" value="Comment">
+                    <button>Cancel</button>
+                </div>
+            </form>
+            </div>
+            `;
+}
+function showResults() {
+    return `<li>
+                ${topPokemon}
+            </li>`;
+}
+class PokemonVotingPoll {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+    async init() {
+        // Fill the title with the name of the page:
+        document.querySelector(".page-title").textContent = "Poll Page | Pok\xe9Gen";
+        //Render Poll Page main:
+        (0, _utilsMjs.renderWithTemplate)(pollTemplate(), this.mainContainer);
+        let voteList = (0, _utilsMjs.getLocalStorage)("votes");
+        // Check pokemon inside the votes object:
+        let maxVote = 0;
+        let maxVote2 = 0;
+        let maxVote3 = 0;
+        let maxVote4 = 0;
+        let pokemon1 = "";
+        let pokemon2 = "";
+        let pokemon3 = "";
+        let pokemon4 = "";
+        // Compare votes to find the pokemon with the most votes:
+        let topPokemon1 = {};
+        for(let pokemon in voteList){
+            if (voteList[pokemon] > maxVote) {
+                maxVote = voteList[pokemon];
+                pokemon1 = pokemon;
+            } else if (voteList[pokemon] > maxVote2 && voteList[pokemon] < maxVote) {
+                maxVote2 = voteList[pokemon];
+                pokemon2 = pokemon;
+            } else if (voteList[pokemon] > maxVote3 && voteList[pokemon] < maxVote2) {
+                maxVote3 = voteList[pokemon];
+                pokemon3 = pokemon;
+            } else if (voteList[pokemon] > maxVote4 && voteList[pokemon] < maxVote3) {
+                maxVote4 = voteList[pokemon];
+                pokemon4 = pokemon;
+            }
+        }
+        Object.assign(topPokemon1, {
+            pokemon1: [
+                [
+                    pokemon1
+                ],
+                [
+                    maxVote
+                ]
+            ],
+            pokemon2: [
+                [
+                    pokemon2
+                ],
+                [
+                    maxVote2
+                ]
+            ],
+            pokemon3: [
+                [
+                    pokemon3
+                ],
+                [
+                    maxVote3
+                ]
+            ],
+            pokemon4: [
+                [
+                    pokemon4
+                ],
+                [
+                    maxVote4
+                ]
+            ]
+        });
+        console.log(topPokemon1);
+    }
+}
+exports.default = PokemonVotingPoll;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9VahQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+function signupPageTemplate() {
+    return `<h1>Signup</h1>
+            <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
+            <form action="" method="post">
+                <input type="text" name="user-name" placeholder=User Name">
+                <input type="email" name="user-email" placeholder="Email">
+                <input type="password" name="user-pass" placeholder="Password">
+                <input type="button" name="signup-btn" value="Signup">
+                </form>
+            <div class="popup" id="popUp">
+                <h2>Thank you!</h2>
+                <p>You've created your account. Thanks!</p>
+            </div>`;
+}
+function togglePopup() {
+    document.getElementById("popUp").classList.toggle("active");
+}
+class SignUp {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+    async init() {
+        //Fill title with the name of the page:
+        document.querySelector(".page-title").textContent = "Sign Up | Pok\xe9Gen";
+        //Render SignUp main:
+        (0, _utilsMjs.renderWithTemplate)(signupPageTemplate(), this.mainContainer);
+        //Click function:
+        document.querySelector("#signup-btn").addEventListener("click", ()=>{
+            return togglePopup;
+        });
+    }
+}
+exports.default = SignUp;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
 
