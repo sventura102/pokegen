@@ -81,13 +81,13 @@ form label {
     margin-bottom:0;
 }
 
-#sign-up-form label {
+#sign-up-form label, #comment-form label {
     padding-left: .2em;
     margin-top: .5em;
     text-align: left;
 }
 
-form input, select {
+form input, select, textarea {
     font-size: 1em;
     box-sizing: border-box;
     border: 1px solid var(--color-5);
@@ -124,6 +124,10 @@ form button {
 /* Footer: */
 footer{
     margin-top: auto;
+}
+
+footer a {
+    color: var(--color-4);
 }
 
 /* Poke Details */
