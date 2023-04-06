@@ -1,9 +1,10 @@
 import { renderWithTemplate, renderListWithTemplate, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 function pokeDetailsMainTemplate(pokemon) {
-    return `<h1>Welcome to the ${pokemon.name}</h1>
+    return `<h1>Welcome to the pokémon details page!</h1>
+            <h2>We present to you... ${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}!</h2>
             <div id="pokemon-card">
-                <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}">
+                <img class="card-img" src="${pokemon.sprites.other.dream_world.front_default}" alt="Image of ${pokemon.name}">
                 <h2>${pokemon.name.toUpperCase()}</h2>
                 <p>Type: ${pokemon.types.map(type => type.type.name).join(", ")}</p>    
                 <ul>Abilities:<br><br>
