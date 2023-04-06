@@ -624,6 +624,7 @@ function initRouter(dataSource, mainContainer) {
     window.addEventListener("hashchange", (e)=>{
         const newUrl = new URL(e.newURL);
         const hash = newUrl.hash;
+        window.location.reload();
         hashToRoute(hash);
     });
 }
