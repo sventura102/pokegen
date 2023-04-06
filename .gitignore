@@ -106,6 +106,3 @@ dist
 # Parcel cache
 .parcel-cache/
 .parcel-cache/data.mdb
-<<<<<<< HEAD
-.parcel-cache/data.mdb
-.parcel-cache/data.mdb
