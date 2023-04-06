@@ -81,6 +81,12 @@ form label {
     margin-bottom:0;
 }
 
+#sign-up-form label {
+    padding-left: .2em;
+    margin-top: .5em;
+    text-align: left;
+}
+
 form input, select {
     font-size: 1em;
     box-sizing: border-box;

@@ -5,7 +5,6 @@ import PokemonDetails from "./PokeDetails.mjs";
 import PokemonVotingPoll from "./poll-process.mjs";
 import SignUp from "./SignUp.mjs";
 
-
 const mainContainer = document.querySelector(".main-content");
 const dataSource = new ExternalServices();
 initRouter(dataSource, mainContainer);
