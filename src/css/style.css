@@ -210,6 +210,9 @@ form button {
     background-color:var(--color-1);
     padding: 2px;
 }
+#pokemon-card button {
+    cursor: pointer;
+}
 
 /* Poll: */
 

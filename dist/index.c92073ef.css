@@ -207,6 +207,10 @@ form button {
   padding: 2px;
 }
 
+#pokemon-card button {
+  cursor: pointer;
+}
+
 .poll {
   border: 2px solid var(--color-3);
   border-radius: 5px;
