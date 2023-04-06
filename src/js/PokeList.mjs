@@ -22,9 +22,10 @@ function pokemonListCardTemplate(pokemon) {
         id = pokemon.pokemon.id;
         name = pokemon.pokemon.name;
     }
-    return `<li class="pokemon-card">
+    return `<li>
                 <a href="/#/poke-details" id="${id}">
                     <h3 class="poke-name">${name}</h3>
+                    <p>Click to see details!</p>
                 </a>
                 <button type="submit" id="${name}">Vote for Me!</button>
             </li>`;

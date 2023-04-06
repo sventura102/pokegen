@@ -5,7 +5,6 @@ function pollTemplate() {
     return `<h1>Poll Page</h1>
             <h2>The top 4 pokemons:</h2>
             <div class="poll">
-                <img id="poll-image" src="" alt="image of trophy">
                 <ul class="topPokemon">
                 </ul>
             </div>
@@ -28,16 +27,16 @@ function pollTemplate() {
 
 function showResults(topPokemon) {
     return `<li>
-                Awarded <span class="poll-results">1st</span> place: <span class="poll-results">${topPokemon.pokemon1[0]}</span>! With <span class="poll-results">${topPokemon.pokemon1[1]}</span> votes!
+                → Awarded <span class="poll-results">1st</span> place: <span class="poll-results">${topPokemon.pokemon1[0]}</span>! With <span class="poll-results">${topPokemon.pokemon1[1]}</span> votes!
             </li>
             <li>
-                Awarded <span class="poll-results">2nd</span> place: <span class="poll-results">${topPokemon.pokemon2[0]}</span>! With <span class="poll-results">${topPokemon.pokemon2[1]}</span> votes!
+                → Awarded <span class="poll-results">2nd</span> place: <span class="poll-results">${topPokemon.pokemon2[0]}</span>! With <span class="poll-results">${topPokemon.pokemon2[1]}</span> votes!
             </li>
             <li>
-                Awarded <span class="poll-results">3rd</span> place: <span class="poll-results">${topPokemon.pokemon3[0]}</span>! With <span class="poll-results">${topPokemon.pokemon3[1]}</span> votes!
+                → Awarded <span class="poll-results">3rd</span> place: <span class="poll-results">${topPokemon.pokemon3[0]}</span>! With <span class="poll-results">${topPokemon.pokemon3[1]}</span> votes!
             </li>
             <li>
-                Awarded <span class="poll-results">4th</span> place: <span class="poll-results">${topPokemon.pokemon4[0]}</span>! With <span class="poll-results">${topPokemon.pokemon4[1]}</span> votes!
+                → Awarded <span class="poll-results">4th</span> place: <span class="poll-results">${topPokemon.pokemon4[0]}</span>! With <span class="poll-results">${topPokemon.pokemon4[1]}</span> votes!
             </li>`
 };
 
@@ -53,8 +52,6 @@ export default class PokemonVotingPoll {
 
         //Render Poll Page main:
         renderWithTemplate(pollTemplate(), this.mainContainer);
-
-        document.querySelector("#poll-image").setAttribute("src", "images/poke-trophy.png");
         
         let voteList = getLocalStorage("votes");
 

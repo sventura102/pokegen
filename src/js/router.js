@@ -2,7 +2,7 @@ import ExternalServices from "./ExternalServices.mjs";
 import HomePage from "./HomePage.mjs";
 import PokemonList from "./PokeList.mjs";
 import PokemonDetails from "./PokeDetails.mjs";
-import PokemonVotingPoll from "./poll-process.mjs";
+import PokemonVotingPoll from "./PollPorcess.mjs";
 import SignUp from "./SignUp.mjs";
 
 const mainContainer = document.querySelector(".main-content");
