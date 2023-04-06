@@ -7,12 +7,12 @@ function homePageTemplate() {
             <form action="/#/poke-list" id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
                 <select id="gen-select" required></select>
-                <button id="gen-btn" type="submit">Show Pokemons!</button>
+                <button id="gen-btn" type="submit">Show Pokémons!</button>
             </form>
 
             <h2>→ Select Pokémons based on type</h2>
             <form action="/#/poke-list" id="type-form" name="type-form">
-                <button id="type-btn" type="submit">Show Pokemons!</button>
+                <button id="type-btn" type="submit">Show Pokémons!</button>
             </form>`;
 }
 
