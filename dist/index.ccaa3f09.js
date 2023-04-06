@@ -1032,21 +1032,22 @@ function pollTemplate() {
     return `<h1>Poll Page</h1>
             <h2>The top 4 pokemons:</h2>
             <div class="poll">
+                <img id="poll-image" src="" alt="image of trophy">
                 <ul class="topPokemon">
                 </ul>
             </div>
             <div class ="comments">
             <h2>Leave Your Comments</h2>
-            <form id=comment-form>
+            <form id="comment-form">
                 <label for="fullName">Name:</label>
-                <input type="fullName" name="fullName" id="fullName" required>
+                <input type="fullName" id="fullName" placeholder="John Doe" required>
+
                 <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" required>
-                <textarea placeholder='Add Your Comment'></textarea>
-                <div class="button">
-                    <input type="submit" value="Comment">
-                    <button>Cancel</button>
-                </div>
+                <input type="email" id="email" placeholder="poke-fan@example.com" required>
+                
+                <label for="comment">Comment:</label>
+                <textarea id="comment" placeholder="Add Your Comment Here..." required></textarea>
+                <button type="submit">Post Comment</button>
             </form>
             </div>
             `;
@@ -1075,6 +1076,7 @@ class PokemonVotingPoll {
         document.querySelector(".page-title").textContent = "Poll Page | Pok\xe9Gen";
         //Render Poll Page main:
         (0, _utilsMjs.renderWithTemplate)(pollTemplate(), this.mainContainer);
+        document.querySelector("#poll-image").setAttribute("src", "images/poke-trophy.png");
         let voteList = (0, _utilsMjs.getLocalStorage)("votes");
         // Check pokemon inside the votes object:
         let maxVote = 0;
@@ -1152,7 +1154,7 @@ function signupPageTemplate() {
             <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
             <form id="sign-up-form">
                 <label for="user-name">Name:</label>
-                <input type="text" id="user-name" placeholder=User Name" required>
+                <input type="text" id="user-name" placeholder="Jane Doe" required>
 
                 <label for="user-email">Email:</label>
                 <input type="email" id="user-email" placeholder="poke-fan@example.com" required>

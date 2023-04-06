@@ -76,13 +76,13 @@ form label {
   padding-top: calc(.375rem + 1px);
 }
 
-#sign-up-form label {
+#sign-up-form label, #comment-form label {
   text-align: left;
   margin-top: .5em;
   padding-left: .2em;
 }
 
-form input, select {
+form input, select, textarea {
   box-sizing: border-box;
   border: 1px solid var(--color-5);
   color: var(--color-5);
@@ -117,6 +117,10 @@ form button {
 
 footer {
   margin-top: auto;
+}
+
+footer a {
+  color: var(--color-4);
 }
 
 .card-img {
