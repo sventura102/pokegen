@@ -3,14 +3,14 @@ import {getLocalStorage, renderListWithTemplate, renderWithTemplate, setLocalSto
 function homePageTemplate() {
     return `<h1>Welcome to the Pokémon Generator!</h1>
 
-            <h2>Select Pokémons based on generation</h2>
+            <h2>→ Select Pokémons based on generation</h2>
             <form action="/#/poke-list" id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
                 <select id="gen-select" required></select>
                 <button id="gen-btn" type="submit">Show Pokemons!</button>
             </form>
 
-            <h2>Select Pokémons based on type</h2>
+            <h2>→ Select Pokémons based on type</h2>
             <form action="/#/poke-list" id="type-form" name="type-form">
                 <button id="type-btn" type="submit">Show Pokemons!</button>
             </form>`;
@@ -21,8 +21,9 @@ function genOptions(genJSON) {
 }
 
 function typeOptions(typeJSON) {
-    return `<input class="type" type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
-            <label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}</label>`;
+    return `<label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}
+                <input class="type" type="checkbox" id="${typeJSON.name}"  value="${typeJSON.name}">
+            </label>`;
 }
 
 function getCheckedTypes() {
@@ -55,9 +56,6 @@ export default class HomePage {
 
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | PokéGen";
-
-        // Add footer year:
-        document.querySelector("#footer-year").textContent =  new Date().getFullYear();
         
         // Await promise from dataSource:
         const generationsList = await this.dataSource.getPokeGenerations();

@@ -1,3 +1,154 @@
+/* Colors: */
+:root {
+    --color-1: #F2F2F2;
+    --color-2: #FFCB05;
+    --color-3: #D6A600;
+    --color-4: #3365A6;
+    --color-5: #1F2E61;
+    --color-6: #FFFFFF;
+    
+}
+
+/* General: */
+body {
+    /* Fonts: */
+    font-family: "Silkscreen", "cursive";
+    background-color: var(--color-6);
+    max-width: 100%;
+    margin: 0;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation: */
+nav {
+    background-color: var(--color-5);
+}
+
+#navbar ul{
+    margin: 0;
+    max-width: 100%;
+    list-style-type: none;
+    display: flex;
+    justify-content:space-evenly;
+    padding: 0 0 0 0.5em;
+}
+
+#navbar ul li {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem 0.3rem;
+    text-align: center;
+    max-width: 100%;
+}
+
+#navbar ul li a{
+    text-decoration: none;
+    color: var(--color-6);
+}
+#navbar ul li a:hover {
+    background-color: var(--color-4);
+    font-size: 1.05em;
+    padding: 0.75rem;
+    cursor: pointer;
+}
+
+/* Main: */
+main {
+    display: flex;
+    padding: 0.5rem;
+    justify-content: center;
+    align-content: center;
+}
+.main-content {
+    max-width: 900px;
+}
+
+/* Forms: */
+form {
+    margin: 1rem auto;
+    max-width: 500px;
+    padding: 1em 1em 0 1em;
+    border: 1px solid var(--color-3);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+form label {
+    padding-top:calc(.375rem + 1px);
+    margin-bottom:0;
+}
+
+form input, select {
+    font-size: 1em;
+    box-sizing: border-box;
+    border: 1px solid var(--color-5);
+    border-radius: 5px;
+    color:var(--color-5);
+    display:block;
+    width:100%;
+    padding:.375rem .75rem;
+    line-height:1.5;
+}
+
+form select, input[type=checkbox], form button {
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    display: inline-block;
+    width: unset;
+    padding: 0;
+}
+
+form button {
+    width: 12rem;
+    padding: .8rem;
+    margin: 20px auto;
+    border-radius: 5px;
+    border: 2px solid var(--color-3);
+    background-color: var(--color-2);
+    -webkit-text-stroke: 2px var(--color-5);
+    color: var(--color-5);
+}
+
+
+/* Footer: */
+footer{
+    margin-top: auto;
+}
+
+/* Poke Details */
+.card-img {
+    max-width: 200px;
+    margin-top: 20px;
+}
+
+#pokemon-card {
+    margin: auto;
+    width: 320px;
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 1px 1px 4px 1px #888;
+    overflow: hidden;
+    max-width: 500px;
+    margin: auto;
+    border: 2px black;
+}
+
+li {
+    margin-left: 20px;
+}
+ul {
+    text-align: left;
+}
+#pokemon-card p {
+    background-color: rgb(210,210,207);
+    padding: 2px;
+}
+
 /* Poll Process Styling*/
 
 /*Sign Up Styling 

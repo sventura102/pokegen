@@ -1,3 +1,145 @@
+:root {
+  --color-1: #f2f2f2;
+  --color-2: #ffcb05;
+  --color-3: #d6a600;
+  --color-4: #3365a6;
+  --color-5: #1f2e61;
+  --color-6: #fff;
+}
 
+body {
+  background-color: var(--color-6);
+  max-width: 100%;
+  text-align: center;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+  font-family: Silkscreen, "cursive";
+  display: flex;
+}
+
+nav {
+  background-color: var(--color-5);
+}
+
+#navbar ul {
+  max-width: 100%;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0 0 0 .5em;
+  list-style-type: none;
+  display: flex;
+}
+
+#navbar ul li {
+  text-align: center;
+  max-width: 100%;
+  padding: .8rem .3rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#navbar ul li a {
+  color: var(--color-6);
+  text-decoration: none;
+}
+
+#navbar ul li a:hover {
+  background-color: var(--color-4);
+  cursor: pointer;
+  padding: .75rem;
+  font-size: 1.05em;
+}
+
+main {
+  place-content: center;
+  padding: .5rem;
+  display: flex;
+}
+
+.main-content {
+  max-width: 900px;
+}
+
+form {
+  max-width: 500px;
+  border: 1px solid var(--color-3);
+  border-radius: 5px;
+  flex-direction: column;
+  margin: 1rem auto;
+  padding: 1em 1em 0;
+  display: flex;
+}
+
+form label {
+  margin-bottom: 0;
+  padding-top: calc(.375rem + 1px);
+}
+
+form input, select {
+  box-sizing: border-box;
+  border: 1px solid var(--color-5);
+  color: var(--color-5);
+  width: 100%;
+  border-radius: 5px;
+  padding: .375rem .75rem;
+  font-size: 1em;
+  line-height: 1.5;
+  display: block;
+}
+
+form select, input[type="checkbox"], form button {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  width: unset;
+  padding: 0;
+  display: inline-block;
+}
+
+form button {
+  width: 12rem;
+  border: 2px solid var(--color-3);
+  background-color: var(--color-2);
+  -webkit-text-stroke: 2px var(--color-5);
+  color: var(--color-5);
+  border-radius: 5px;
+  margin: 20px auto;
+  padding: .8rem;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.card-img {
+  max-width: 200px;
+  margin-top: 20px;
+}
+
+#pokemon-card {
+  width: 320px;
+  max-width: 500px;
+  background-color: #fff;
+  border: 2px #000;
+  border-radius: 3px;
+  margin: auto;
+  overflow: hidden;
+  box-shadow: 1px 1px 4px 1px #888;
+}
+
+li {
+  margin-left: 20px;
+}
+
+ul {
+  text-align: left;
+}
+
+#pokemon-card p {
+  background-color: #d2d2cf;
+  padding: 2px;
+}
 
 /*# sourceMappingURL=index.c92073ef.css.map */

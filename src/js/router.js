@@ -11,7 +11,7 @@ const dataSource = new ExternalServices();
 initRouter(dataSource, mainContainer);
 
 export function initRouter(dataSource, mainContainer) {
-
+    
     function hashToRoute(hash) {
         switch(hash) {
             case "#/home-page":
@@ -58,8 +58,13 @@ export function initRouter(dataSource, mainContainer) {
                 break;
         }
     }
+    function setFooterYear() {
+        // Add footer year:
+        document.querySelector("#footer-year").textContent =  new Date().getFullYear();
+    }
 
     const defaultHash = window.location.hash || "#/home-page";
+    setFooterYear();
     hashToRoute(defaultHash);
 
     window.addEventListener("hashchange", (e) => {

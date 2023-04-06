@@ -32,15 +32,15 @@ export default class ExternalServices {
     }
     // Gets JSON (with name->[5] and pokemon->[9]) from given URL:
     async getPokemonsByType(type) {
-        const products = await fetch(baseURL + `type/${type}/`);
-        const data = await convertToJson(products);
+        const response = await fetch(baseURL + `type/${type}/`);
+        const data = await convertToJson(response);
         return data.pokemon;
     }
 
     // Find a specific pokémon based on its ID:
     async findPokemonById(id) {
-        const pokemon = await fetch(baseURL + `pokemon/${id}`);
-        const data = await convertToJson(pokemon);
+        const response = await fetch(baseURL + `pokemon/${id}`);
+        const data = await convertToJson(response);
         return data;
     }
 
