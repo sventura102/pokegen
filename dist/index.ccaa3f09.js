@@ -614,7 +614,12 @@ function initRouter(dataSource, mainContainer) {
                 break;
         }
     }
+    function setFooterYear() {
+        // Add footer year:
+        document.querySelector("#footer-year").textContent = new Date().getFullYear();
+    }
     const defaultHash = window.location.hash || "#/home-page";
+    setFooterYear();
     hashToRoute(defaultHash);
     window.addEventListener("hashchange", (e)=>{
         const newUrl = new URL(e.newURL);
@@ -655,14 +660,14 @@ class ExternalServices {
     }
     // Gets JSON (with name->[5] and pokemon->[9]) from given URL:
     async getPokemonsByType(type) {
-        const products = await fetch(baseURL + `type/${type}/`);
-        const data = await convertToJson(products);
+        const response = await fetch(baseURL + `type/${type}/`);
+        const data = await convertToJson(response);
         return data.pokemon;
     }
     // Find a specific pokémon based on its ID:
     async findPokemonById(id) {
-        const pokemon = await fetch(baseURL + `pokemon/${id}`);
-        const data = await convertToJson(pokemon);
+        const response = await fetch(baseURL + `pokemon/${id}`);
+        const data = await convertToJson(response);
         return data;
     }
 }
@@ -705,14 +710,14 @@ var _utilsMjs = require("./utils.mjs");
 function homePageTemplate() {
     return `<h1>Welcome to the Pokémon Generator!</h1>
 
-            <h2>Select Pokémons based on generation</h2>
+            <h2>→ Select Pokémons based on generation</h2>
             <form action="/#/poke-list" id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
                 <select id="gen-select" required></select>
                 <button id="gen-btn" type="submit">Show Pokemons!</button>
             </form>
 
-            <h2>Select Pokémons based on type</h2>
+            <h2>→ Select Pokémons based on type</h2>
             <form action="/#/poke-list" id="type-form" name="type-form">
                 <button id="type-btn" type="submit">Show Pokemons!</button>
             </form>`;
@@ -721,8 +726,9 @@ function genOptions(genJSON) {
     return `<option value="${genJSON.name}">${genJSON.url.slice(-2, -1)}</option>`;
 }
 function typeOptions(typeJSON) {
-    return `<input class="type" type="checkbox" id="${typeJSON.name}" value="${typeJSON.name}">
-            <label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}</label>`;
+    return `<label for="${typeJSON.name}">${typeJSON.name.charAt(0).toUpperCase() + typeJSON.name.slice(1)}
+                <input class="type" type="checkbox" id="${typeJSON.name}"  value="${typeJSON.name}">
+            </label>`;
 }
 function getCheckedTypes() {
     let types = document.querySelectorAll(".type");
@@ -749,8 +755,6 @@ class HomePage {
         });
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = "Home Page | Pok\xe9Gen";
-        // Add footer year:
-        document.querySelector("#footer-year").textContent = new Date().getFullYear();
         // Await promise from dataSource:
         const generationsList = await this.dataSource.getPokeGenerations();
         const typesList = await this.dataSource.getPokeTypes();
@@ -843,17 +847,29 @@ function renderWithTemplate(template, parentElement, data, callback) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsMjs = require("./utils.mjs");
-function pokeListMainTemplate(category) {
-    return `<h1>Pokémon List by ${category}</h1>
-            <h2>These are the pokémons that were introduced in the selected ${category}</h2>
+function pokeListMainTemplate(headerInfo) {
+    let h2 = "";
+    if (headerInfo[0] == "generation") h2 = `<h2>These are the pokémons that were introduced in ${headerInfo[0]} ${headerInfo[1]}</h2>`;
+    else h2 = `<h2>These are the pokémons that have ${headerInfo[0]} "${headerInfo[1]}"</h2>`;
+    return `<h1>Pokémon List by ${headerInfo[0]}</h1>
+            ${h2}
             <ul id="pokemon-list"></ul>`;
 }
 function pokemonListCardTemplate(pokemon) {
+    let id = 0;
+    let name = "";
+    if ((0, _utilsMjs.getLocalStorage)("category") == "generation") {
+        id = pokemon.id;
+        name = pokemon.name;
+    } else if ((0, _utilsMjs.getLocalStorage)("category") == "types") {
+        id = pokemon.pokemon.id;
+        name = pokemon.pokemon.name;
+    }
     return `<li class="pokemon-card">
-                <a href="/#/poke-details" id="${pokemon.id}">
-                    <h3 class="poke-name">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
+                <a href="/#/poke-details" id="${id}">
+                    <h3 class="poke-name">${name}</h3>
                 </a>
-                <button type="submit" id="${pokemon.name}">Vote for Me!</button>
+                <button type="submit" id="${name}">Vote for Me!</button>
             </li>`;
 }
 class PokemonList {
@@ -861,6 +877,11 @@ class PokemonList {
         this.dataSource = dataSource;
         this.mainContainer = mainContainer;
         this.category = (0, _utilsMjs.getLocalStorage)("category");
+        this.selection = (0, _utilsMjs.getLocalStorage)(this.category);
+        this.headerInfo = [
+            this.category,
+            this.selection
+        ];
         this.pokeList = [];
         this.pokeInfo = [];
         this.sortBy = "name"; // initialize the default sorting order
@@ -869,24 +890,45 @@ class PokemonList {
         // Fill the title with the name of the page:
         document.querySelector(".page-title").textContent = `Pokémon List by ${this.category} | PokéGen`;
         // Render PokeList main:
-        (0, _utilsMjs.renderWithTemplate)(pokeListMainTemplate(this.category), this.mainContainer);
-        // Get number of generation from LocalStorage:
-        let generation = (0, _utilsMjs.getLocalStorage)("generation");
-        // Await promise from dataSource:
-        this.pokeList = await this.dataSource.getPokemonsByGeneration(generation);
-        // Sort the list based on the default sorting order(name):
-        this.sortPokeList(this.pokeList);
-        // Set the pokemon information in the pokeList:
-        this.pokeList.forEach((pokemon)=>{
-            const url = pokemon.url.slice(0, -1);
-            const pokeId = url.substring(url.lastIndexOf("/") + 1);
-            pokemon.id = pokeId;
-        // //Get pokemon info from API:
-        // this.getPokeInfo(pokeId);s
-        });
+        (0, _utilsMjs.renderWithTemplate)(pokeListMainTemplate(this.headerInfo), this.mainContainer);
         // Get the options parent elements:
         const pokemonListElement = document.querySelector("#pokemon-list");
-        // Render list of generations:
+        if (this.category == "generation") {
+            // Get number of generation from LocalStorage:
+            let generation = (0, _utilsMjs.getLocalStorage)("generation");
+            // Await promise from dataSource:
+            this.pokeList = await this.dataSource.getPokemonsByGeneration(generation);
+            // Sort the list based on the default sorting order(name):
+            this.sortPokeList(this.pokeList);
+            // Set the pokemon information in the pokeList:
+            this.pokeList.forEach((pokemon)=>{
+                const url = pokemon.url.slice(0, -1);
+                const pokeId = url.substring(url.lastIndexOf("/") + 1);
+                pokemon.id = pokeId;
+            });
+        } else {
+            // Get types from localStorage (array with types):
+            let types = (0, _utilsMjs.getLocalStorage)("types");
+            let pokeByTypes = [];
+            // Await promise from dataSource:
+            for(let type in types){
+                console.log(types[type]);
+                pokeByTypes.push(await this.dataSource.getPokemonsByType(types[type]));
+            //Object.assign(this.pokeList, {[types[type]] : await this.dataSource.getPokemonsByType(types[type])});
+            }
+            this.pokeList = pokeByTypes;
+            // Set the pokemon information in the pokeList:
+            this.pokeList.forEach((type)=>{
+                type.forEach((pokemon)=>{
+                    const url = pokemon.pokemon.url.slice(0, -1);
+                    const pokeId = url.substring(url.lastIndexOf("/") + 1);
+                    pokemon.pokemon.id = pokeId;
+                    this.pokeList.push(pokemon);
+                });
+            });
+            this.pokeList.splice(0, 3);
+        }
+        // Render list of pokémons:
         (0, _utilsMjs.renderListWithTemplate)(pokemonListCardTemplate, pokemonListElement, this.pokeList);
         // Listen for click on button:
         document.querySelectorAll("button").forEach((occurence)=>{
@@ -920,6 +962,10 @@ class PokemonList {
     async getPokeInfo(pokeId) {
         this.pokeInfo = await this.dataSource.findPokemonById(pokeId);
     }
+    //Get pokémons based on types:
+    async getPokemonsByType(type) {
+        return await this.dataSource.getPokemonsByType(type);
+    }
 } /* const pokeInfo = await this.dataSource.findPokemonById(pokeId); */  /* <img src="${pokemon.sprites}" alt="Image of ${pokemon.name}">"/>
 <p class="poke-color">${pokemon}</p>
 <p class="poke-type">${pokemon}</p>
@@ -931,9 +977,10 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsMjs = require("./utils.mjs");
 function pokeDetailsMainTemplate(pokemon) {
-    return `<h1>Welcome to the ${pokemon.name}</h1>
+    return `<h1>Welcome to the pokémon details page!</h1>
+            <h2>We present to you... ${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}!</h2>
             <div id="pokemon-card">
-                <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}">
+                <img class="card-img" src="${pokemon.sprites.other.dream_world.front_default}" alt="Image of ${pokemon.name}">
                 <h2>${pokemon.name.toUpperCase()}</h2>
                 <p>Type: ${pokemon.types.map((type)=>type.type.name).join(", ")}</p>    
                 <ul>Abilities:<br><br>
