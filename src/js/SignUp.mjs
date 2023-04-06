@@ -6,7 +6,7 @@ function signupPageTemplate() {
                 <input type="text" name="user-name" placeholder=User Name">
                 <input type="email" name="user-email" placeholder="Email">
                 <input type="password" name="user-pass" placeholder="Password">
-                <input type="button" name="signup-btn" value="Signup">
+                <button type="button" name="signup-btn">Signup</button>
                 </form>
             <div class="popup" id="popUp">
                 <h2>Thank you!</h2>
