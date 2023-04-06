@@ -568,8 +568,8 @@ var _pokeListMjs = require("./PokeList.mjs");
 var _pokeListMjsDefault = parcelHelpers.interopDefault(_pokeListMjs);
 var _pokeDetailsMjs = require("./PokeDetails.mjs");
 var _pokeDetailsMjsDefault = parcelHelpers.interopDefault(_pokeDetailsMjs);
-var _pollProcessMjs = require("./poll-process.mjs");
-var _pollProcessMjsDefault = parcelHelpers.interopDefault(_pollProcessMjs);
+var _pollPorcessMjs = require("./PollPorcess.mjs");
+var _pollPorcessMjsDefault = parcelHelpers.interopDefault(_pollPorcessMjs);
 var _signUpMjs = require("./SignUp.mjs");
 var _signUpMjsDefault = parcelHelpers.interopDefault(_signUpMjs);
 const mainContainer = document.querySelector(".main-content");
@@ -599,7 +599,7 @@ function initRouter(dataSource, mainContainer) {
             case "#/poke-poll":
                 // Delete previous main content:
                 mainContainer.innerHtml = "";
-                const pokePoll = new (0, _pollProcessMjsDefault.default)(dataSource, mainContainer);
+                const pokePoll = new (0, _pollPorcessMjsDefault.default)(dataSource, mainContainer);
                 pokePoll.init();
                 break;
             case "#/poke-signup":
@@ -628,7 +628,7 @@ function initRouter(dataSource, mainContainer) {
     });
 }
 
-},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./PokeDetails.mjs":"68RwI","./poll-process.mjs":"bmPuY","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2hnZ":[function(require,module,exports) {
+},{"./ExternalServices.mjs":"b2hnZ","./HomePage.mjs":"dkD60","./PokeList.mjs":"ixoBQ","./PokeDetails.mjs":"68RwI","./SignUp.mjs":"9VahQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./PollPorcess.mjs":"9gcYo"}],"b2hnZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const baseURL = "https://pokeapi.co/api/v2/";
@@ -714,12 +714,12 @@ function homePageTemplate() {
             <form action="/#/poke-list" id="generation-form" name="gen-form">
                 <label for="generations">Generation:</label>
                 <select id="gen-select" required></select>
-                <button id="gen-btn" type="submit">Show Pokemons!</button>
+                <button id="gen-btn" type="submit">Show Pokémons!</button>
             </form>
 
             <h2>→ Select Pokémons based on type</h2>
             <form action="/#/poke-list" id="type-form" name="type-form">
-                <button id="type-btn" type="submit">Show Pokemons!</button>
+                <button id="type-btn" type="submit">Show Pokémons!</button>
             </form>`;
 }
 function genOptions(genJSON) {
@@ -865,9 +865,10 @@ function pokemonListCardTemplate(pokemon) {
         id = pokemon.pokemon.id;
         name = pokemon.pokemon.name;
     }
-    return `<li class="pokemon-card">
+    return `<li>
                 <a href="/#/poke-details" id="${id}">
                     <h3 class="poke-name">${name}</h3>
+                    <p>Click to see details!</p>
                 </a>
                 <button type="submit" id="${name}">Vote for Me!</button>
             </li>`;
@@ -1023,7 +1024,51 @@ class PokemonDetails {
 }
 exports.default = PokemonDetails;
 
-},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bmPuY":[function(require,module,exports) {
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9VahQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utilsMjs = require("./utils.mjs");
+function signupPageTemplate() {
+    return `<h1>Signup</h1>
+            <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
+            <form id="sign-up-form">
+                <label for="user-name">Name:</label>
+                <input type="text" id="user-name" placeholder="Jane Doe" required>
+
+                <label for="user-email">Email:</label>
+                <input type="email" id="user-email" placeholder="poke-fan@example.com" required>
+
+                <label for="user-pass">Password:</label>
+                <input type="password" id="user-pass" required>
+
+                <button type="submit" id="signup-btn">Sign-up</button>
+            </form>`;
+}
+function successMessageTemplate() {
+    return `<div class="popup" id="popUp">
+                <h2>Thank you!</h2>
+                <p>You've created your account. Be sure to check your email for updates! Gotta catch 'em all!! ;)</p>
+            </div>`;
+}
+class SignUp {
+    constructor(dataSource, mainContainer){
+        this.dataSource = dataSource;
+        this.mainContainer = mainContainer;
+    }
+    async init() {
+        // Fill title with the name of the page:
+        document.querySelector(".page-title").textContent = "Sign Up | Pok\xe9Gen";
+        // Render SignUp main:
+        (0, _utilsMjs.renderWithTemplate)(signupPageTemplate(), this.mainContainer);
+        // Listen for click on the form button:
+        document.querySelector("#signup-btn").addEventListener("click", ()=>{
+            this.mainContainer.innerHTML += successMessageTemplate();
+        });
+    }
+}
+exports.default = SignUp;
+
+},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9gcYo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsMjs = require("./utils.mjs");
@@ -1032,7 +1077,6 @@ function pollTemplate() {
     return `<h1>Poll Page</h1>
             <h2>The top 4 pokemons:</h2>
             <div class="poll">
-                <img id="poll-image" src="" alt="image of trophy">
                 <ul class="topPokemon">
                 </ul>
             </div>
@@ -1054,16 +1098,16 @@ function pollTemplate() {
 }
 function showResults(topPokemon) {
     return `<li>
-                Awarded <span class="poll-results">1st</span> place: <span class="poll-results">${topPokemon.pokemon1[0]}</span>! With <span class="poll-results">${topPokemon.pokemon1[1]}</span> votes!
+                → Awarded <span class="poll-results">1st</span> place: <span class="poll-results">${topPokemon.pokemon1[0]}</span>! With <span class="poll-results">${topPokemon.pokemon1[1]}</span> votes!
             </li>
             <li>
-                Awarded <span class="poll-results">2nd</span> place: <span class="poll-results">${topPokemon.pokemon2[0]}</span>! With <span class="poll-results">${topPokemon.pokemon2[1]}</span> votes!
+                → Awarded <span class="poll-results">2nd</span> place: <span class="poll-results">${topPokemon.pokemon2[0]}</span>! With <span class="poll-results">${topPokemon.pokemon2[1]}</span> votes!
             </li>
             <li>
-                Awarded <span class="poll-results">3rd</span> place: <span class="poll-results">${topPokemon.pokemon3[0]}</span>! With <span class="poll-results">${topPokemon.pokemon3[1]}</span> votes!
+                → Awarded <span class="poll-results">3rd</span> place: <span class="poll-results">${topPokemon.pokemon3[0]}</span>! With <span class="poll-results">${topPokemon.pokemon3[1]}</span> votes!
             </li>
             <li>
-                Awarded <span class="poll-results">4th</span> place: <span class="poll-results">${topPokemon.pokemon4[0]}</span>! With <span class="poll-results">${topPokemon.pokemon4[1]}</span> votes!
+                → Awarded <span class="poll-results">4th</span> place: <span class="poll-results">${topPokemon.pokemon4[0]}</span>! With <span class="poll-results">${topPokemon.pokemon4[1]}</span> votes!
             </li>`;
 }
 class PokemonVotingPoll {
@@ -1076,7 +1120,6 @@ class PokemonVotingPoll {
         document.querySelector(".page-title").textContent = "Poll Page | Pok\xe9Gen";
         //Render Poll Page main:
         (0, _utilsMjs.renderWithTemplate)(pollTemplate(), this.mainContainer);
-        document.querySelector("#poll-image").setAttribute("src", "images/poke-trophy.png");
         let voteList = (0, _utilsMjs.getLocalStorage)("votes");
         // Check pokemon inside the votes object:
         let maxVote = 0;
@@ -1144,50 +1187,6 @@ class PokemonVotingPoll {
     }
 }
 exports.default = PokemonVotingPoll;
-
-},{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9VahQ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _utilsMjs = require("./utils.mjs");
-function signupPageTemplate() {
-    return `<h1>Signup</h1>
-            <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
-            <form id="sign-up-form">
-                <label for="user-name">Name:</label>
-                <input type="text" id="user-name" placeholder="Jane Doe" required>
-
-                <label for="user-email">Email:</label>
-                <input type="email" id="user-email" placeholder="poke-fan@example.com" required>
-
-                <label for="user-pass">Password:</label>
-                <input type="password" id="user-pass" required>
-
-                <button type="submit" id="signup-btn">Sign-up</button>
-            </form>`;
-}
-function successMessageTemplate() {
-    return `<div class="popup" id="popUp">
-                <h2>Thank you!</h2>
-                <p>You've created your account. Be sure to check your email for updates! Gotta catch 'em all!! ;)</p>
-            </div>`;
-}
-class SignUp {
-    constructor(dataSource, mainContainer){
-        this.dataSource = dataSource;
-        this.mainContainer = mainContainer;
-    }
-    async init() {
-        // Fill title with the name of the page:
-        document.querySelector(".page-title").textContent = "Sign Up | Pok\xe9Gen";
-        // Render SignUp main:
-        (0, _utilsMjs.renderWithTemplate)(signupPageTemplate(), this.mainContainer);
-        // Listen for click on the form button:
-        document.querySelector("#signup-btn").addEventListener("click", ()=>{
-            this.mainContainer.innerHTML += successMessageTemplate();
-        });
-    }
-}
-exports.default = SignUp;
 
 },{"./utils.mjs":"6Qrgp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["egcxg","jSUBV"], "jSUBV", "parcelRequire38ce")
 
