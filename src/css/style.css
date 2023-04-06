@@ -219,7 +219,8 @@ form button {
 }
 .topPokemon {
     list-style-type: none;
-    padding: 1em
+    padding: 1em;
+    text-align: left;
 }
 .topPokemon li {
     padding-left: 0;
