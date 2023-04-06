@@ -76,6 +76,12 @@ form label {
   padding-top: calc(.375rem + 1px);
 }
 
+#sign-up-form label {
+  text-align: left;
+  margin-top: .5em;
+  padding-left: .2em;
+}
+
 form input, select {
   box-sizing: border-box;
   border: 1px solid var(--color-5);
