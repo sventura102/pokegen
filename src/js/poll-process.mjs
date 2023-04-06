@@ -5,21 +5,22 @@ function pollTemplate() {
     return `<h1>Poll Page</h1>
             <h2>The top 4 pokemons:</h2>
             <div class="poll">
+                <img id="poll-image" src="" alt="image of trophy">
                 <ul class="topPokemon">
                 </ul>
             </div>
             <div class ="comments">
             <h2>Leave Your Comments</h2>
-            <form id=comment-form>
+            <form id="comment-form">
                 <label for="fullName">Name:</label>
-                <input type="fullName" name="fullName" id="fullName" required>
+                <input type="fullName" id="fullName" placeholder="John Doe" required>
+
                 <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" required>
-                <textarea placeholder='Add Your Comment'></textarea>
-                <div class="button">
-                    <input type="submit" value="Comment">
-                    <button>Cancel</button>
-                </div>
+                <input type="email" id="email" placeholder="poke-fan@example.com" required>
+                
+                <label for="comment">Comment:</label>
+                <textarea id="comment" placeholder="Add Your Comment Here..." required></textarea>
+                <button type="submit">Post Comment</button>
             </form>
             </div>
             `;
@@ -52,6 +53,8 @@ export default class PokemonVotingPoll {
 
         //Render Poll Page main:
         renderWithTemplate(pollTemplate(), this.mainContainer);
+
+        document.querySelector("#poll-image").setAttribute("src", "images/poke-trophy.png");
         
         let voteList = getLocalStorage("votes");
 
