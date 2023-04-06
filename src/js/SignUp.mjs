@@ -4,7 +4,7 @@ function signupPageTemplate() {
             <h2>Please fill in this form to receive updates when new Pokémons are released!</h2>
             <form id="sign-up-form">
                 <label for="user-name">Name:</label>
-                <input type="text" id="user-name" placeholder=User Name" required>
+                <input type="text" id="user-name" placeholder="Jane Doe" required>
 
                 <label for="user-email">Email:</label>
                 <input type="email" id="user-email" placeholder="poke-fan@example.com" required>
