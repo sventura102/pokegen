@@ -65,6 +65,9 @@ main {
 .main-content {
     max-width: 900px;
 }
+p, label, li {
+    font-weight: 400;
+}
 
 /* Forms: */
 form {
